@@ -25,14 +25,14 @@
             <h2>Witaj!</h2>
             <form action="login" method="POST">
                 <label for="email">E-mail
-                <input type="email" id="email" required placeholder="test@gmail.com">
+                <input type="email" name="email" required placeholder="test@gmail.com">
                 </label>
                 <label for="password">Hasło
                 <input type="password" name="password" required placeholder="hasło">
                 </label>
                 
 
-                <button type="sumbit">Zaloguj się</button>
+                <button type="submit">Zaloguj się</button>
             </form>
             <p>Nie masz konta? <a href="/register">Zarejestruj się</a></p>
             <?php

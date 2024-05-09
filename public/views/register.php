@@ -23,9 +23,9 @@
         </div>
         <div class="form_wrapper registration">
             <h2>Załóż konto!</h2>
-            <form action="login" method="POST">
+            <form action="register" method="POST">
             <label for="email">E-mail
-                <input type="email" id="email" required placeholder="test@gmail.com">
+                <input type="email" name="email" required placeholder="test@gmail.com">
                 </label>
                 <label for="password">Hasło
                 <input type="password" name="password" required placeholder="hasło">
@@ -34,7 +34,7 @@
                 <input type="password" name="password_confirmation" required placeholder="potwierdź hasło">
                 </label>
 
-                <button type="sumbit">Zarejestruj się</button>
+                <button type="submit">Zarejestruj się</button>
             </form>
             <p>Masz już konto? <a href="/login">Zaloguj się</a></p>
             <?php
