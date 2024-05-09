@@ -14,5 +14,21 @@ class UserRepository extends Repository{
         $user->getPassword(),
     ]);
     }
+
+    public function getUserByEmail(string $email){
+        $stmt = $this->database->connect()->prepare('
+        SELECT * FROM users WHERE email = :email
+    ');
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->execute();
+
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    if($user){
+        return true;
+    }
+
+    return false;
+
+    }
 }
 ?>

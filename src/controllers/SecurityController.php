@@ -31,9 +31,15 @@ class SecurityController extends AppController
             $this->render('register', ['messages' => ["Podane hasła się różnią"]]); 
         }
 
+        if($this->userRepository->getUserByEmail($email)){
+            $this->render('register', ['messages' => ["Użytkownik o takim e-mailu już istnieje."]]); 
+        }
+
+
         $passwordHash = password_hash($password,PASSWORD_BCRYPT);
         $user = new User($email,$passwordHash);
-
+        $doesEmailExists = $this->userRepository->getUserByEmail($email);
+       
         $this->userRepository->addUser($user);
         return $this->render('login', ['messages' => ['Zostałeś zarejestrowany!']]);
     }
