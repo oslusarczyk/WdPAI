@@ -125,3 +125,85 @@
     visibility: visible;
 }
 
+@media screen and (max-width:1500px) {
+    .image_wrapper{
+        width: 40vw;
+    }
+
+    .form_wrapper{
+        width: 25vw;
+    }
+}
+
+@media screen and (max-width:1216px) {
+    .image_wrapper, .form_wrapper{
+        margin-top: 5vh;
+        height: 60vh;
+    }
+    .image_wrapper{
+        width: 45vw;
+    }
+
+    .form_wrapper{
+        width: 30vw;
+    }
+}
+
+@media screen and (max-width:1024px) {
+    .image_wrapper{
+        width: 55vw;
+    }
+    .form_wrapper{
+        width: 35vw;
+    }
+}
+
+@media screen and (max-width:768px){
+    .image_wrapper{
+        display: none;
+    }
+    .header_logo{
+        width: 220px;
+        left: 50%;
+        top: 2%;
+        transform: translateX(-50%);
+    }
+    .form_wrapper{
+        width: 70vw;
+        box-shadow: none;
+        margin-top: 15vh;
+        height: 65vh;
+    }
+}
+
+@media screen and (max-width:544px){
+    .header_logo{
+        width: 185px;
+    }
+    .form_wrapper{
+        width: 80vw;
+        margin-top: 25vh;
+        height: 70vh;
+    }
+}
+
+
+@media screen and (max-width:460px){
+    .form_wrapper{
+        width: 100vw;
+    }
+
+    .form_wrapper form{
+        width: 85%;
+    }
+}
+
+@media screen and (max-width:380px){
+    .header_logo{
+        width: 140px;
+    }
+    .form_wrapper{
+        margin-top: 20vh;
+        height: 80vh;
+    }
+}
