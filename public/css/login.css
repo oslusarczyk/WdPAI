@@ -109,3 +109,19 @@
     outline: 0px;
     box-shadow: 0 0 1px 1px  var(--main-color); 
 }
+
+.message{
+    background-color: var(--main-color);
+    padding: 25px 10px;
+    border-radius: 10px;
+    color: white;
+    position: absolute;
+    bottom:2%;
+    right:2%;
+    visibility: hidden;
+}
+
+.message.visible{
+    visibility: visible;
+}
+

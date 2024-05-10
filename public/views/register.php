@@ -43,7 +43,7 @@
                         echo $message;
                     }
                 }
-                ?>
+            ?>
         </div>
     </div>
 </body>

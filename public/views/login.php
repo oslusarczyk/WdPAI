@@ -35,13 +35,18 @@
                 <button type="submit">Zaloguj się</button>
             </form>
             <p>Nie masz konta? <a href="/register">Zarejestruj się</a></p>
+            <div class="message <?php if(!empty($messages)) echo 'visible'; ?>" >
+            <p>
             <?php
-                if(isset($messages)) {
-                    foreach ($messages as $message) {
-                        echo $message;
-                    }
+             if(isset($messages)) {
+                foreach ($messages as $message) {
+                    echo $message;
                 }
-                ?>
+            }   
+            ?>
+            </p>
+            </div>
+         
         </div>
     </div>
 </body>
