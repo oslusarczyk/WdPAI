@@ -23,13 +23,15 @@ class AppController {
     {
         $templatePath = 'public/views/'. $template.'.php';
         $output = 'File not found';
-        if(file_exists($templatePath)){
-            extract($variables);
-            
-            ob_start();
-            include $templatePath;
-            $output = ob_get_clean();
+
+        if(!file_exists($templatePath)){
+            $templatePath = 'public/views/error.php';
         }
+        extract($variables);
+            
+        ob_start();
+        include $templatePath;
+        $output = ob_get_clean();
         print $output;
     }
 }

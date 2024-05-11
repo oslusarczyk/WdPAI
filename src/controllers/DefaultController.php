@@ -13,6 +13,10 @@ class DefaultController extends AppController {
       return $this->render('main');
     }
 
+    public function error(){
+        return $this->render('error');
+    }
+
  
 }
 
