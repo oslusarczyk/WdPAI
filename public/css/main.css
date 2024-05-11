@@ -3,7 +3,6 @@ nav{
     position: fixed;
     height: 100vh;
     display: flex;
-    /* justify-content: flex-start; */
     align-items: center;
     flex-direction: column;
     width: 10vw;
@@ -16,9 +15,10 @@ nav{
 .navParts{
     height: 100%;
     display: flex;
-    flex-direction: row;
-    align-content:  space-between;
-    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    width: 100%;
 }
 
 .mainPart,.secondPart{
@@ -43,10 +43,14 @@ i{
     line-height: 100%;
 }
 
-
-.mainPart a:nth-last-child(1){
+.navParts a:nth-child(3){
     border-bottom: 1px solid #BB9393;
 }
+
+.navParts a:nth-child(4){
+    margin-top: auto;
+}
+
 
 @media screen and (max-width:1500px) {
     .header_logo{
@@ -85,35 +89,25 @@ i{
     .navParts{
         width: 100%;
         flex-direction: row;
-        flex-wrap: nowrap;
-    }
-
-    .mainPart,.secondPart{
-        display: flex;
-    }
-    
-    .mainPart{
         justify-content: space-around;
-        width: 100vw;
     }
-
-    .secondPart{
-        flex-direction: row;
-        justify-content: flex-end;
-        width: auto
-    }
-
+ 
     p{
         display: none;
     }
 
+    .navParts a:nth-child(3){
+        border-bottom: 0;
+    }
+    .navParts a:nth-child(4){
+        margin-top: 0;
+    }
+    
     a{
         border: 0;
         width: 50px;
         font-size: 2.2rem;
     }
 
-    .mainPart a:nth-last-child(1){
-        border-bottom: 0;
-    }
+
 }
