@@ -40,6 +40,11 @@ class Database {
     {
         return $this->connection;
     }
+
+    public function disconnect()
+    {
+        $this->connection = null;
+    }
 }
 
 ?>
