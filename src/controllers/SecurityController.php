@@ -35,7 +35,7 @@ class SecurityController extends AppController
         $_SESSION['user'] = serialize($user);
         
         $url = "http://$_SERVER[HTTP_HOST]";
-        header("Location: {$url}/main");
+        return header("Location: {$url}/main");
     }
 
     public function main()
@@ -69,6 +69,13 @@ class SecurityController extends AppController
        
         $this->userRepository->addUser($user);
         return $this->render('login', ['messages' => ['Zostałeś zarejestrowany!']]);
+    }
+
+    public function logout(){
+        session_unset();
+        session_destroy();
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}");
     }
 }
 

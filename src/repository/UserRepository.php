@@ -4,7 +4,7 @@ require_once 'Repository.php';
 require_once __DIR__.'/../models/User.php';
 
 class UserRepository extends Repository{
-    public function addUser(User $user){
+    public function addUser(User $user) : void{
         $stmt = $this->database->connect()->prepare('
         INSERT INTO users (email,password)
         VALUES (?, ?)
@@ -15,7 +15,7 @@ class UserRepository extends Repository{
     ]);
     }
 
-    public function getUser(string $email){
+    public function getUser(string $email) : ?User {
         $stmt = $this->database->connect()->prepare('
         SELECT * FROM users WHERE email = :email
     ');
@@ -31,7 +31,7 @@ class UserRepository extends Repository{
 
     }
 
-    public function doesEmailExists(string $email){
+    public function doesEmailExists(string $email):bool{
         $stmt = $this->database->connect()->prepare('
         SELECT * FROM users WHERE email = :email
     ');
@@ -42,9 +42,7 @@ class UserRepository extends Repository{
     if($user){
         return true;
     }
-
     return false;
-
     }
 }
 ?>

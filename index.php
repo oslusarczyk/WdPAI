@@ -13,6 +13,7 @@ Router::get('', 'DefaultController');
 Router::post('login','SecurityController');
 Router::post('register','SecurityController');
 Router::get('main','SecurityController');
+Router::get('logout','SecurityController');
 
 Router::run($path);
 
