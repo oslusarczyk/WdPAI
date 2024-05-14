@@ -2,19 +2,19 @@
 require_once 'AppController.php';
 require_once __DIR__.'/../repository/LocationRepository.php';
 require_once __DIR__.'/../models/Location.php';
-require_once __DIR__.'/../repository/CarsRepository.php';
+require_once __DIR__.'/../repository/CarRepository.php';
 require_once __DIR__.'/../models/Car.php';
 
 class CarsController extends AppController
 
 {
     private $locationRepository;
-    private $carsRepository;
+    private $carRepository;
 
     public function __construct(){
         parent::__construct();
         $this->locationRepository = new LocationRepository();
-        $this->carsRepository = new CarsRepository();
+        $this->carRepository = new CarRepository();
     }
 
     public function main()
@@ -23,7 +23,9 @@ class CarsController extends AppController
             return $this->render('main');
         }
         $locations = $this->locationRepository->getAllLocations();
-        return $this->render('main', ['locations' => $locations]);
+        $cars = $this->carRepository->getAllCars();
+        var_dump($cars);
+        return $this->render('main', ['locations' => $locations, 'cars'=> $cars]);
 
     }
 

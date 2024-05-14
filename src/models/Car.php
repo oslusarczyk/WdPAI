@@ -1,5 +1,5 @@
 <?php
-    class Car{
+    class Car {
         private $id;
         private $brand;
         private $model;
@@ -7,8 +7,10 @@
         private $seats_available;
         private $photo;
         private $locations;
+        private $productionYear;
+        private $carDescription;
 
-        public function __construct(string $brand, string $model, int $price_per_day, int $seats_available, string $photo, string $locations,int $id=0){
+        public function __construct(string $brand, string $model, int $price_per_day, int $seats_available, string $photo, string $locations, int $productionYear, string $carDescription,int $id=0){
             $this->id = $id;
             $this->brand = $brand;
             $this->model = $model;
@@ -16,6 +18,8 @@
             $this->seats_available = $seats_available;
             $this->photo = $photo;
             $this->locations = $locations;
+            $this->productionYear = $productionYear;
+            $this->carDescription = $carDescription;
     }
 
         public function getId(): int
@@ -53,4 +57,15 @@
         return $this->locations;
     }
 
+    public function getProductionYear(): int
+    {
+        return $this->productionYear;
+    }
+
+    public function getCarDescription(): string
+    {
+        return $this->carDescription;
+    }
+
+    }
 ?>

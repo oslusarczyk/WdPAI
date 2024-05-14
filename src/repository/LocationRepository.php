@@ -5,7 +5,8 @@ require_once __DIR__.'/../models/Location.php';
 
 class LocationRepository extends Repository{
     public function getAllLocations() :array{
-        $stmt = $this->database->connect()->prepare('
+    $this->database->connect();
+        $stmt = $this->database->getConnection()->prepare('
         SELECT * FROM locations
     ');
     $stmt->execute();

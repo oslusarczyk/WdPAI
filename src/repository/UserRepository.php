@@ -5,7 +5,8 @@ require_once __DIR__.'/../models/User.php';
 
 class UserRepository extends Repository{
     public function addUser(User $user) : void{
-    $stmt = $this->database->connect()->prepare('
+    $this->database->connect();
+    $stmt = $this->database->getConnection()->prepare('
         INSERT INTO users (email,password)
         VALUES (?, ?)
     ');
@@ -18,7 +19,8 @@ class UserRepository extends Repository{
     }
 
     public function getUser(string $email) : ?User {
-    $stmt = $this->database->connect()->prepare('
+    $this->database->connect();
+    $stmt = $this->database->getConnection()->prepare('
         SELECT * FROM users WHERE email = :email
     ');
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
@@ -34,7 +36,8 @@ class UserRepository extends Repository{
     }
 
     public function doesEmailExists(string $email):bool{
-        $stmt = $this->database->connect()->prepare('
+    $this->database->connect();
+    $stmt = $this->database->getConnection()->prepare('
         SELECT * FROM users WHERE email = :email
     ');
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
