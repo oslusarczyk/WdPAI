@@ -44,6 +44,18 @@ class SecurityController extends AppController
 
     }
 
+    public function cars()
+    {
+        return $this->render('cars');
+
+    }
+
+    public function history ()
+    {
+        return $this->render('history');
+
+    }
+
 
 
     public function register()

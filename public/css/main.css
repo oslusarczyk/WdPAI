@@ -38,6 +38,10 @@ a{
     text-align: right;
 }
 
+a.active{
+    color: var(--main-color);
+}
+
 i{
     text-align: left;
     line-height: 100%;

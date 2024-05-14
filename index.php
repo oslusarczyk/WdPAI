@@ -12,6 +12,8 @@ $path = parse_url( $path, PHP_URL_PATH);
 
 if(isset($_SESSION['user'])){
     Router::get('main','SecurityController');
+    Router::get('cars','SecurityController');
+    Router::get('history','SecurityController');
     Router::get('logout','SecurityController');
 }
 Router::get('', 'DefaultController');
