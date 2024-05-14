@@ -18,5 +18,4 @@
             <p>wyloguj</p>
         </a>
     </div>
-    </div>
 </nav>

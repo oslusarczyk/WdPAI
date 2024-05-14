@@ -1,117 +1,61 @@
-nav{
-    background-color: black;
-    position: fixed;
-    height: 100vh;
+
+.wrapper_main{
+    margin-left: var(--width);
+    width: calc(100% - var(--width))
+}
+
+
+.header{
+    height: 23vh;
+    background-image: linear-gradient(rgba(255,255,255,0.67), rgba(255,255,255,0.67)), url('/public/img/car_logo.jpg');
+    background-position: center;
+    background-size: inherit;
     display: flex;
+    justify-content: center;
     align-items: center;
-    flex-direction: column;
-    width: 10vw;
 }
 
-.header_logo{
-   position: static; 
-}
 
-.navParts{
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
-    width: 100%;
-}
-
-.mainPart,.secondPart{
-    width: 100%;
-}
-
-a{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-    padding: 10px;
+.form_wrapper{
+    height: 85%;
+    width: 20%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.55);
     text-transform: uppercase;
-    font-size: 1.4rem;
-    padding: 15px 5px;
-    border-top: 1px solid #BB9393;
-    text-align: right;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-a.active{
-    color: var(--main-color);
+.form_wrapper label{
+    font-weight: 300;
+    display: block;
 }
 
-i{
-    text-align: left;
-    line-height: 100%;
-}
-
-.navParts a:nth-child(3){
-    border-bottom: 1px solid #BB9393;
-}
-
-.navParts a:nth-child(4){
-    margin-top: auto;
-}
-
-
-@media screen and (max-width:1500px) {
-    .header_logo{
-        width: 130px;
-     }
+.form_wrapper form{
+    margin-top: 15px;
+    height: 50%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 
 }
 
-@media screen and (max-width:1216px) {
-    nav{
-        width: 13vw;
-    }
-
-    .header_logo{
-        width: 110px;
-     }
-}
-
-@media screen and (max-width:1024px) {
-    nav{
-        width: 16vw;
-    }
-}
-
-@media screen and (max-width:768px) {
-    .header_logo{
-        display: none;
-    }
-
-    nav{
-        bottom: 0;
-        width: 100vw;
-        height: 8vh;
-    }
-    
-    .navParts{
-        width: 100%;
-        flex-direction: row;
-        justify-content: space-around;
-    }
- 
-    p{
-        display: none;
-    }
-
-    .navParts a:nth-child(3){
-        border-bottom: 0;
-    }
-    .navParts a:nth-child(4){
-        margin-top: 0;
-    }
-    
-    a{
-        border: 0;
-        width: 50px;
-        font-size: 2.2rem;
-    }
+.form_wrapper button{
+    padding: 5px 10px;
+    font-size: 1.5rem;
+    margin-top: 10px;
+  }
 
 
+  #location_select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: var(--input-color);
 }
