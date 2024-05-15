@@ -26,15 +26,59 @@
                         </label>
                         <select name="location" id="location_select">
                             <?php foreach ($locations as $location): ?>
-                                <option value="<?= $location->getLocationName(); ?>"><?= $location->getLocationName(); ?></option>
+                            <option value="<?= $location->getLocationName(); ?>"><?= $location->getLocationName(); ?>
+                            </option>
                             <?php endforeach; ?>
                         </select>
                         <button type="submit">Szukaj</button>
                     </form>
                 </div>
             </div>
-            <div class="main">
+            <div class="mainPage">
                 <h2>Najpopularniejsze auta</h2>
+                <div class="carsWrapper">
+                    <?php foreach ($cars as $car): ?>
+                    <div class="carCard">
+                        <div class="leftPart">
+                            <img src="public/img/<?= $car->getPhoto(); ?>" alt="car image">
+                        </div>
+                        <div class="rightPart">
+                            <h4 class="carName"><?= $car->getBrand()." ".$car->getModel()?></h4>
+                            <p class="carLocations">
+                                <i class='bx bx-map'></i>
+                                <?php
+                                $locationsCount = count(explode(",", $car->getLocations()));
+                                $text = "lokalizacja";
+                                if($locationsCount >= 2 && $locationsCount <= 4){
+                                    $text = "lokalizacje";
+                                } else if($locationsCount > 5){
+                                    $text = "lokalizacji";
+                                }
+                                echo "$locationsCount $text";
+                            ?>
+                            </p>
+                            <p class="seats">
+                                <i class='bx bx-body'></i>
+                                <?php
+                                $seats = $car->getSeatsAvailable();
+                                $text = "osoby";
+                                if($seats > 4){
+                                    $text = "osób";
+                                }
+                                echo "$seats $text";
+                                ?>
+                            </p>
+                            <p class="price">od <?= $car->getPricePerDay(); ?> PLN</p>
+                            <button class="buttonClass">
+                                <a href="/$id=<?=$car->getId(); ?>">
+                                    Zobacz więcej
+                                </a>
+                            </button>
+
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
             </div>
         </div>
     </div>

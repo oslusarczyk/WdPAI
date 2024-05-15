@@ -24,7 +24,6 @@ class CarsController extends AppController
         }
         $locations = $this->locationRepository->getAllLocations();
         $cars = $this->carRepository->getAllCars();
-        var_dump($cars);
         return $this->render('main', ['locations' => $locations, 'cars'=> $cars]);
 
     }

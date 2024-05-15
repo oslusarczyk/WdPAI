@@ -10,7 +10,7 @@
         private $productionYear;
         private $carDescription;
 
-        public function __construct(string $brand, string $model, int $price_per_day, int $seats_available, string $photo, string $locations, int $productionYear, string $carDescription,int $id=0){
+        public function __construct(string $brand, string $model, int $price_per_day, int $seats_available, string $photo, string $locations,int $id, int $productionYear = null, string $carDescription = null,){
             $this->id = $id;
             $this->brand = $brand;
             $this->model = $model;

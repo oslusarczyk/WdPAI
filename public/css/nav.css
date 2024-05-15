@@ -5,7 +5,7 @@ nav{
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 12vw;
+    width: var(--width);
     z-index: 1;
 }
 
@@ -26,7 +26,7 @@ nav{
     width: 100%;
 }
 
-a{
+.navParts a{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -39,7 +39,7 @@ a{
     text-align: right;
 }
 
-a.active{
+.navParts a.active{
     color: var(--main-color);
 }
 
@@ -65,19 +65,12 @@ i{
 }
 
 @media screen and (max-width:1216px) {
-    nav{
-        width: 15vw;
-    }
-
     .header_logo{
         width: 110px;
      }
 }
 
 @media screen and (max-width:1024px) {
-    nav{
-        width: 17vw;
-    }
 }
 
 @media screen and (max-width:768px) {
@@ -108,7 +101,7 @@ i{
         margin-top: 0;
     }
     
-    a{
+    .navParts a{
         border: 0;
         width: 50px;
         font-size: 2.2rem;
