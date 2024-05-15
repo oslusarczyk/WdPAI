@@ -7,7 +7,7 @@
     <link rel="icon" type="image/x-icon" href="public/img/smartcar_logo.ico">
     <link rel="stylesheet" type="text/css"  href="public/css/basic_styling.css" />
     <link rel="stylesheet" type="text/css" href="public/css/login.css" />
-
+    <script src="public\js\utils.js" defer></script>
     <title>LOGIN</title>
 </head>
 <body>
@@ -36,7 +36,9 @@
                 <button type="submit">Zaloguj się</button>
             </form>
             <p>Nie masz konta? <a href="/register">Zarejestruj się</a></p>
-            <div class="message <?php if(!empty($messages)) echo 'visible'; ?>" >
+        </div>
+    </div>
+    <div class="message <?php if(!empty($messages)) echo 'visible'; ?>" >
             <p>
             <?php
              if(isset($messages)) {
@@ -46,9 +48,7 @@
             }   
             ?>
             </p>
+            <span class="close_modal">&#10006;</span>
             </div>
-         
-        </div>
-    </div>
 </body>
 </html>

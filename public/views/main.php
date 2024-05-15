@@ -10,7 +10,6 @@
     <link rel="stylesheet" type="text/css" href="public/css/basic_styling.css">
     <link rel="stylesheet" type="text/css" href="public/css/nav.css">
     <link rel="stylesheet" type="text/css" href="public/css/main.css">
-
     <title>STRONA GŁÓWNA</title>
 </head>
 

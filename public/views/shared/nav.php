@@ -1,4 +1,4 @@
-<script src="public\js\nav.js" defer></script>
+<script src="public\js\utils.js" defer></script>
 
 <nav>
     <div class="header_logo">

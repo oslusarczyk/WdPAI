@@ -9,7 +9,6 @@
     <link rel="icon" type="image/x-icon" href="public/img/smartcar_logo.ico">
     <link rel="stylesheet" type="text/css"  href="public/css/basic_styling.css">
     <link rel="stylesheet" type="text/css" href="public/css/nav.css">
-
     <title>HISTORIA</title>
 </head>
 

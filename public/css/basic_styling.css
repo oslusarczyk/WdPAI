@@ -55,10 +55,6 @@ a{
   html{
    font-size: 15px;
  }
-
- /* :root{
-  --width: 15vw;
- } */
 } 
 
 @media screen and (max-width:1216px) {
@@ -110,5 +106,6 @@ button{
 }
 
 button:hover{
-  outline: 2px solid black;
+  /* outline: 2px solid black; */
+  box-shadow: 0 0 2px 2px black;
 }

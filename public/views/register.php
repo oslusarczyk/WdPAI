@@ -7,7 +7,8 @@
     <link rel="icon" type="image/x-icon" href="public/img/smartcar_logo.ico">
     <link rel="stylesheet" type="text/css"  href="public/css/basic_styling.css">
     <link rel="stylesheet" type="text/css" href="public/css/login.css">
-
+    <script src="public\js\utils.js" defer></script>
+    <script src="public\js\formValidation.js" defer></script>
     <title>REJESTRACJA</title>
 </head>
 <body>
