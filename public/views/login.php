@@ -14,7 +14,7 @@
     <div class="header_logo">
         <img src="public\img\smartcar_logo.png" alt="SmartCar logo">
     </div>
-    <div class="wrapper">
+    <div class="flex-row wrapper">
         <div class="image_wrapper">
             <img src="public\img\car_logo.jpg" alt="car image">
             <div class="text_wrapper">
@@ -22,9 +22,9 @@
             </div>
             
         </div>
-        <div class="form_wrapper">
+        <div class="form_wrapper flex-column">
             <h2>Witaj!</h2>
-            <form action="login" method="POST">
+            <form class="flex-column" action="login" method="POST">
                 <label for="email">E-mail
                 <input type="email" name="email" required placeholder="test@gmail.com">
                 </label>

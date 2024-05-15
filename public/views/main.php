@@ -8,7 +8,6 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="icon" type="image/x-icon" href="public/img/smartcar_logo.ico">
     <link rel="stylesheet" type="text/css" href="public/css/basic_styling.css">
-    <link rel="stylesheet" type="text/css" href="public/css/nav.css">
     <link rel="stylesheet" type="text/css" href="public/css/main.css">
     <title>STRONA GŁÓWNA</title>
 </head>
@@ -17,10 +16,10 @@
     <div class="wrapper">
         <?php include_once __DIR__ . '/shared/nav.php' ?>
         <div class="wrapper_main">
-            <div class="header">
-                <div class="form_wrapper">
+            <div class="header flex-column">
+                <div class="form_wrapper flex-column">
                     <h3>Wynajmij auto</h3>
-                    <form action="" method="POST">
+                    <form class="flex-column" action="" method="POST">
                         <label for="location_select">Miejsce wynajmu
                         </label>
                         <select name="location" id="location_select">
@@ -41,7 +40,7 @@
                         <div class="leftPart">
                             <img src="public/img/<?= $car->getPhoto(); ?>" alt="car image">
                         </div>
-                        <div class="rightPart">
+                        <div class="rightPart flex-column">
                             <h4 class="carName"><?= $car->getBrand()." ".$car->getModel()?></h4>
                             <p class="carLocations">
                                 <i class='bx bx-map'></i>

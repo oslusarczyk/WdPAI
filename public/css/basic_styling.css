@@ -109,3 +109,13 @@ button:hover{
   /* outline: 2px solid black; */
   box-shadow: 0 0 2px 2px black;
 }
+
+.flex-column{
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row{
+  display: flex;
+  flex-direction: row;
+}
