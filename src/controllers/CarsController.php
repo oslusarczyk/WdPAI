@@ -23,7 +23,7 @@ class CarsController extends AppController
             return $this->render('main');
         }
         $locations = $this->locationRepository->getAllLocations();
-        $cars = $this->carRepository->getAllCars();
+        $cars = $this->carRepository->getMostPopularCars();
         return $this->render('main', ['locations' => $locations, 'cars'=> $cars]);
 
     }

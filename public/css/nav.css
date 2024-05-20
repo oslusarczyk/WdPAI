@@ -1,10 +1,16 @@
 nav{
-    background-color: black;
+    background-color: rgba(0,0,0,1);
     position: fixed;
     height: 100vh;
     align-items: center;
     width: var(--width);
     z-index: 1;
+    transition: background-color 0.3s ease;
+}
+
+
+nav.scroll{
+    background-color: rgba(0,0,0,0.9);
 }
 
 .header_logo{

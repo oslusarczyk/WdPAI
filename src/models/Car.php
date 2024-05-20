@@ -7,10 +7,10 @@
         private $seats_available;
         private $photo;
         private $locations;
-        private $productionYear;
-        private $carDescription;
+        private $production_year;
+        private $car_description;
 
-        public function __construct(string $brand, string $model, int $price_per_day, int $seats_available, string $photo, string $locations,int $id, int $productionYear = null, string $carDescription = null,){
+        public function __construct(string $brand, string $model, int $price_per_day, int $seats_available, string $photo, string $locations,int $id, int $production_year = null, string $car_description = null,){
             $this->id = $id;
             $this->brand = $brand;
             $this->model = $model;
@@ -18,8 +18,8 @@
             $this->seats_available = $seats_available;
             $this->photo = $photo;
             $this->locations = $locations;
-            $this->productionYear = $productionYear;
-            $this->carDescription = $carDescription;
+            $this->production_year = $production_year;
+            $this->car_description = $car_description;
     }
 
         public function getId(): int
@@ -59,12 +59,12 @@
 
     public function getProductionYear(): int
     {
-        return $this->productionYear;
+        return $this->production_year;
     }
 
     public function getCarDescription(): string
     {
-        return $this->carDescription;
+        return $this->car_description;
     }
 
     }

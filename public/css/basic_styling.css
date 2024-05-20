@@ -63,7 +63,7 @@ a{
   }
 
   :root{
-    --width: 15vw;
+    --width: 20vw;
    }
 } 
 
@@ -71,9 +71,7 @@ a{
   html{
    font-size: 12px;
  }
- :root{
-  --width: 17vw;
- }
+
 } 
 
 @media screen and (max-width:768px) {
