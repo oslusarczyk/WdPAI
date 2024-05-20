@@ -3,33 +3,33 @@ class User{
     private $id;
     private $email;
     private $password;
-    private $hasAdminPrivileges;
+    private $has_admin_privileges;
 
-    public function __construct(string $email, string $password, bool $hasAdminPrivileges=FALSE,int $id=0){
+    public function __construct(string $email, string $password, bool $has_admin_privileges=FALSE,int $id=0){
         $this->id = $id;
         $this->email = $email;
         $this->password = $password;
-        $this->hasAdminPrivileges = $hasAdminPrivileges;
+        $this->has_admin_privileges = $has_admin_privileges;
 }
 
-    public function getId()
+    public function getId() :int
     {
         return $this->id;
     }
 
-    public function getEmail()
+    public function getEmail() :string
     {
         return $this->email;
     }
 
-    public function getPassword()
+    public function getPassword() :string
     {
         return $this->password;
     }
 
-    public function getHasAdminPrivileges()
+    public function getHasAdminPrivileges() :bool
     {
-        return $this->hasAdminPrivileges;
+        return $this->has_admin_privileges;
     }
 
 }

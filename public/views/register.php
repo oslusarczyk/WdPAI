@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="public/css/basic_styling.css">
-    <link rel="stylesheet" href="public/css/login.css">
-
+    <link rel="icon" type="image/x-icon" href="public/img/smartcar_logo.ico">
+    <link rel="stylesheet" type="text/css"  href="public/css/basic_styling.css">
+    <link rel="stylesheet" type="text/css" href="public/css/login.css">
+    <script src="public\js\utils.js" defer></script>
+    <script src="public\js\formValidation.js" defer></script>
     <title>REJESTRACJA</title>
 </head>
 <body>
     <div class="header_logo">
         <img src="public\img\smartcar_logo.png" alt="SmartCar logo">
     </div>
-    <div class="wrapper">
+    <div class="flex-row wrapper">
         <div class="image_wrapper">
             <img src="public\img\car_logo.jpg" alt="car image">
             <div class="text_wrapper">
@@ -21,9 +23,9 @@
             </div>
             
         </div>
-        <div class="form_wrapper registration">
+        <div class="form_wrapper flex-column registration">
             <h2>Załóż konto!</h2>
-            <form action="register" method="POST">
+            <form class="flex-column" action="register" method="POST">
             <label for="email">E-mail
                 <input type="email" name="email" required placeholder="test@gmail.com">
                 </label>
@@ -43,7 +45,7 @@
                         echo $message;
                     }
                 }
-                ?>
+            ?>
         </div>
     </div>
 </body>

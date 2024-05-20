@@ -15,8 +15,48 @@ class SecurityController extends AppController
 
     public function login()
     {
-        $this->render('login');
+        if(!$this->isPost()){
+            return $this->render('login');
+        }
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $user = $this->userRepository->getUser($email);
+
+
+        if(!$user){
+            return $this->render('login', ['messages' => ['Nie znaleziono użytkownika o takim mailu.']]);
+        }
+        if(!password_verify($password, $user->getPassword())){
+            return $this->render('login', ['messages' => ['Podano złe hasło użytkownika']]);
+        }
+
+
+        $_SESSION['user'] = serialize($user);
+        
+        $url = "http://$_SERVER[HTTP_HOST]";
+        return header("Location: {$url}/main");
     }
+
+    public function main()
+    {
+        return $this->render('main');
+
+    }
+
+    public function cars()
+    {
+        return $this->render('cars');
+
+    }
+
+    public function history ()
+    {
+        return $this->render('history');
+
+    }
+
+
 
     public function register()
     {
@@ -28,14 +68,26 @@ class SecurityController extends AppController
         $passwordConfirmation = $_POST['password_confirmation'];
 
         if($password !== $passwordConfirmation){
-            $this->render('register', ['messages' => ["Podane hasła się różnią"]]); 
+            return $this->render('register', ['messages' => ["Podane hasła się różnią"]]); 
         }
+
+        if($this->userRepository->doesEmailExists($email)){
+            return $this->render('register', ['messages' => ["Użytkownik o takim e-mailu już istnieje."]]); 
+        }
+
 
         $passwordHash = password_hash($password,PASSWORD_BCRYPT);
         $user = new User($email,$passwordHash);
-
+       
         $this->userRepository->addUser($user);
         return $this->render('login', ['messages' => ['Zostałeś zarejestrowany!']]);
+    }
+
+    public function logout(){
+        session_unset();
+        session_destroy();
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}");
     }
 }
 
