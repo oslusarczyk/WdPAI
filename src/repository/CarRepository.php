@@ -4,18 +4,48 @@ require_once 'Repository.php';
 require_once __DIR__.'/../models/Car.php';
 
 class CarRepository extends Repository{
-    public function getAllCars() : array{
+    public function getAllCars(string $location = null, string $brand = null, int $seats = null, int $minPrice = null, int $maxPrice = null) : array{
     $this->database->connect();
-    $stmt = $this->database->getConnection()->prepare('
-        SELECT * FROM all_cars
-    ');
+
+    $query = "SELECT * FROM all_cars WHERE 1=1";
+    $params = [];
+    
+    if (!empty($location)) {
+        $query .= ' AND :location = ANY(locations)';
+        $params[':location'] = $location;
+    }
+
+      if (!empty($brand)) {
+        $query .= ' AND brand_name = :brand';
+        $params[':brand'] = $brand;
+    }
+
+
+    if (!empty($seats)) {
+        $query .= ' AND seats_available = :seats';
+        $params[':seats'] = $seats;
+    }
+    if (!empty($minPrice)) {
+        $query .= ' AND price_per_day >= :minPrice';
+        $params[':minPrice'] = $minPrice;
+    }
+
+    if(!empty($maxPrice)){
+        $query .= " AND price_per_day <= :maxPrice";
+        $params[':maxPrice'] = $maxPrice;
+    }
+    // 'Kraków' = ANY(all_cars.locations);
+
+
+    $stmt = $this->database->getConnection()->prepare($query);
+
+    foreach ($params as $key => $value) {
+        $stmt->bindValue($key, $value, is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
+    }
+
     $stmt->execute();
     $this->database->disconnect();
-    $cars = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($cars as $car) {
-        $result[] = new Car($car['brand_name'],$car['model'],$car['price_per_day'],$car['seats_available'],$car['photo'],$car['locations'],$id=$car['car_id']);
-    }
-    return $result;
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getMostPopularCars() : array{

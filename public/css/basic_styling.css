@@ -104,7 +104,6 @@ button{
 }
 
 button:hover{
-  /* outline: 2px solid black; */
   box-shadow: 0 0 2px 2px black;
 }
 
@@ -116,4 +115,16 @@ button:hover{
 .flex-row{
   display: flex;
   flex-direction: row;
+}
+
+label{
+  font-weight: 300;
+  display: flex;
+  flex-direction: column;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

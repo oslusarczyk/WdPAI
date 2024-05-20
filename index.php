@@ -19,6 +19,7 @@ if(isset($_SESSION['user'])){
 Router::get('', 'DefaultController');
 Router::post('login','SecurityController');
 Router::post('register','SecurityController');
+Router::post('filterCars','CarsController');
 Router::get('error','DefaultController');
 
 

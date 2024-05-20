@@ -21,19 +21,19 @@
                     <h3>Wynajmij auto</h3>
                     <form class="flex-column" action="" method="POST">
                         <label for="location_select">Miejsce wynajmu
-                        </label>
                         <select name="location" id="location_select">
                             <?php foreach ($locations as $location): ?>
                             <option value="<?= $location->getLocationName(); ?>"><?= $location->getLocationName(); ?>
                             </option>
                             <?php endforeach; ?>
                         </select>
+                        </label>
                         <button type="submit">Szukaj</button>
                     </form>
                 </div>
             </div>
             <div class="mainPage">
-                <h2>Najpopularniejsze auta</h2>
+                <h2>Najpopularniejsze samochody</h2>
                 <div class="carsWrapper">
                     <?php foreach ($cars as $car): ?>
                     <div class="carCard">

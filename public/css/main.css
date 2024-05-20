@@ -10,6 +10,7 @@
     background-position: center;
     background-size: inherit;
     align-items: center;
+    justify-content: center;
 }
 
 .form_wrapper{
@@ -24,10 +25,6 @@
     align-items: center;
 }
 
-.form_wrapper label{
-    font-weight: 300;
-    display: block;
-}
 
 .form_wrapper form{
     margin-top: 15px;
@@ -46,8 +43,7 @@
     margin-top: 10px;
   }
 
-
-  #location_select {
+select {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -261,4 +257,22 @@
     .form_wrapper{
         font-size: 1.2rem;
     }
+}
+
+
+.search{
+    width: 60%;
+}
+
+.search form{
+    flex-direction: row;
+    width: 80%;
+}
+
+
+
+.search label input{
+    margin-top: 10px;
+    width: 50%;
+    padding: 5px 10px;
 }
