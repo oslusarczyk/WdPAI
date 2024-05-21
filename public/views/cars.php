@@ -88,7 +88,7 @@
 
                 <h2>Dostępne samochody</h2>
                 <div class="carsWrapper">
-                    <?php foreach ($cars as $car): ?>
+                    <!-- <?php foreach ($cars as $car): ?>
                     <div class="carCard">
                         <div class="leftPart">
                             <img src="public/img/<?= $car['photo'] ?>" alt="car image">
@@ -128,9 +128,10 @@
 
                         </div>
                     </div>
-                    <?php endforeach; ?>
+                    <?php endforeach; ?> -->
 
                 </div>
+                <div class="paginationWrapper"></div>
             </div>
         </div>
     </div>
