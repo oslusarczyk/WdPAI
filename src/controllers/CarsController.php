@@ -38,9 +38,15 @@ class CarsController extends AppController
         if(!$this->isGet()){
             return $this->render('cars');
         }
+        if(isset($_GET['location'])){
+            $cars = $this->carRepository->getAllCars($_GET['location']);
+        } else{
+            $cars = $this->carRepository->getAllCars();
+        }
         $locations = $this->locationRepository->getAllLocations();
         $brands = $this->brandRepository->getAllBrands();
-        return $this->render('cars', ['locations' => $locations, 'brands' => $brands]);
+    
+        return $this->render('cars', ['locations' => $locations, 'brands' => $brands, 'cars' => $cars, 'selectedLocation'=> $_GET['location'] ?? '' ]);
     }
 
     public function filterCars(){

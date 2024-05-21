@@ -20,12 +20,13 @@
             <div class="header flex-column">
                 <div class="form_wrapper search flex-column">
                     <h3>Wyszukaj</h3>
-                    <form class="flex-column" action="" method="POST">
+                    <form class="flex-column search" action="" method="POST">
                         <label for="location_select">Miejsce wynajmu
                             <select name="location" id="location_select">
                                 <option value="">Wszystkie</option>
                                 <?php foreach ($locations as $location): ?>
-                                <option value="<?= $location->getLocationName(); ?>">
+                                <option value="<?= $location->getLocationName(); ?>"
+                                    <?= $location->getLocationName() == $selectedLocation ? 'selected' : ''; ?>>
                                     <?= $location->getLocationName(); ?>
                                 </option>
                                 <?php endforeach; ?>
@@ -48,29 +49,56 @@
                                 <option value="7">7 miejsc</option>
                             </select>
                         </label>
-                        <label for="price_min">Cena minimalna
-                            <input type="number" name="price_min" id="price_min" min="0" max="500">
-                        </label>
-                        <label for="price_max">Cena minimalna
-                            <input type="number" name="price_max" id="price_max" min="0" max="500">
-                        </label>
+                        <div class="price_range">
+                            <label for="price_min">Cena minimalna
+                                <input type="number" name="price_min" id="price_min" min="0" max="500">
+                            </label>
+                            <label for="price_max">Cena maksymalna
+                                <input type="number" name="price_max" id="price_max" min="0" max="500">
+                            </label>
+                        </div>
+
                     </form>
                 </div>
             </div>
             <div class="mainPage">
-                <h2>Dostępne samochody</h2>
-                <div class="carsWrapper">
-                    <!--            <?php foreach ($cars as $car): ?>
+                <template id="car-template">
                     <div class="carCard">
                         <div class="leftPart">
-                            <img src="public/img/<?= $car->getPhoto(); ?>" alt="car image">
+                            <img src="" alt="car image">
                         </div>
                         <div class="rightPart flex-column">
-                            <h4 class="carName"><?= $car->getBrand()." ".$car->getModel()?></h4>
+                            <h4 class="carName"></h4>
+                            <p class="carLocations">
+                                <i class='bx bx-map'></i>
+                            </p>
+                            <p class="seats">
+                                <i class='bx bx-body'></i>
+                            </p>
+                            <p class="price"></p>
+                            <button class="buttonClass">
+                                <a href="">
+                                    Zobacz więcej
+                                </a>
+                            </button>
+                        </div>
+                    </div>
+                </template>
+
+
+                <h2>Dostępne samochody</h2>
+                <div class="carsWrapper">
+                    <?php foreach ($cars as $car): ?>
+                    <div class="carCard">
+                        <div class="leftPart">
+                            <img src="public/img/<?= $car['photo'] ?>" alt="car image">
+                        </div>
+                        <div class="rightPart flex-column">
+                            <h4 class="carName"><?= $car['brand_name']." ".$car['model']?></h4>
                             <p class="carLocations">
                                 <i class='bx bx-map'></i>
                                 <?php
-                                $locationsCount = count(explode(",", $car->getLocations()));
+                                $locationsCount = count(explode(",", $car['locations']));
                                 $text = "lokalizacja";
                                 if($locationsCount >= 2 && $locationsCount <= 4){
                                     $text = "lokalizacje";
@@ -83,7 +111,7 @@
                             <p class="seats">
                                 <i class='bx bx-body'></i>
                                 <?php
-                                $seats = $car->getSeatsAvailable();
+                                $seats = $car['seats_available'];
                                 $text = "osoby";
                                 if($seats > 4){
                                     $text = "osób";
@@ -91,16 +119,16 @@
                                 echo "$seats $text";
                                 ?>
                             </p>
-                            <p class="price">od <?= $car->getPricePerDay(); ?> PLN</p>
+                            <p class="price">od <?= $car['price_per_day'] ?> PLN</p>
                             <button class="buttonClass">
-                                <a href="/$id=<?=$car->getId(); ?>">
+                                <a href="/$id=<?=$car['car_id'] ?>">
                                     Zobacz więcej
                                 </a>
                             </button>
 
                         </div>
                     </div>
-                    <?php endforeach; ?>  -->
+                    <?php endforeach; ?>
 
                 </div>
             </div>

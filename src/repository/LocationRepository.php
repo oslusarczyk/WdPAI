@@ -18,5 +18,6 @@ class LocationRepository extends Repository{
 
     return $result;
     }
+
 }
 ?>

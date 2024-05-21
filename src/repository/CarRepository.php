@@ -19,8 +19,6 @@ class CarRepository extends Repository{
         $query .= ' AND brand_name = :brand';
         $params[':brand'] = $brand;
     }
-
-
     if (!empty($seats)) {
         $query .= ' AND seats_available = :seats';
         $params[':seats'] = $seats;
@@ -34,7 +32,6 @@ class CarRepository extends Repository{
         $query .= " AND price_per_day <= :maxPrice";
         $params[':maxPrice'] = $maxPrice;
     }
-    // 'Kraków' = ANY(all_cars.locations);
 
 
     $stmt = $this->database->getConnection()->prepare($query);

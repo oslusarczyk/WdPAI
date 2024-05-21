@@ -19,7 +19,7 @@
             <div class="header flex-column">
                 <div class="form_wrapper flex-column">
                     <h3>Wynajmij auto</h3>
-                    <form class="flex-column" action="" method="POST">
+                    <form class="flex-column" action="/cars" method="GET">
                         <label for="location_select">Miejsce wynajmu
                         <select name="location" id="location_select">
                             <?php foreach ($locations as $location): ?>
