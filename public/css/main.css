@@ -43,13 +43,6 @@
     margin-top: 10px;
   }
 
-select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: var(--input-color);
-}
 
 .mainPage{
     max-height: 73vh;

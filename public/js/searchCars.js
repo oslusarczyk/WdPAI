@@ -121,7 +121,7 @@ function createCarCard(car) {
 
     carPrice.innerHTML += "od " + car.price_per_day + " PLN";
 
-    carHref.href = "/$id=" + car.car_id;
+    carHref.href = "carDetails?id=" + car.car_id;
     carsWrapper.appendChild(clone);
 }
 

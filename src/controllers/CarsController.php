@@ -71,6 +71,19 @@ class CarsController extends AppController
 
     }
 
+    public function carDetails(){
+        if(!$this->isGet()){
+            return $this->render('carDetails');
+        }
+
+        if(isset($_GET['id'])){
+            $car_id = $_GET['id'];
+        }
+        $locations = $this->locationRepository->getLocationsByCar($car_id);
+        $car = $this->carRepository->getCarById($car_id);
+        return $this->render('carDetails', ['car' => $car, 'locations' => $locations]);
+    }
+
 
 
 

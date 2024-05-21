@@ -67,5 +67,18 @@ class CarRepository extends Repository{
         }
         return $result;
         }
+
+        public function getCarById(int $id) : array{
+            $this->database->connect();
+            $stmt = $this->database->getConnection()->prepare('
+            SELECT * FROM all_cars
+            WHERE car_id=:id
+            ');
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $this->database->disconnect();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+
+        }
 }
 ?>

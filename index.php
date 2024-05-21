@@ -14,6 +14,7 @@ if(isset($_SESSION['user'])){
     Router::get('main','CarsController');
     Router::get('cars','CarsController');
     Router::get('history','CarsController');
+    Router::get('carDetails','CarsController');
     Router::get('logout','SecurityController');
 }
 Router::get('', 'DefaultController');
