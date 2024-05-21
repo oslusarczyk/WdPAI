@@ -119,9 +119,7 @@ label{
         width: 90%;
     }
 
-    .wrapper_main {
-        margin: 0 0 10vh 0;
-    }
+
 }
 
 @media screen and (max-width:544px){
@@ -143,11 +141,12 @@ label{
     .reservation_form{
         width: 100%;
         text-wrap: nowrap;
-      
     }
 
     .reservation_form form{
-        gap:10px;
+        display: flex;
+        flex-direction: column;
+        padding: 0 0 10vh;
     }
 
     button{

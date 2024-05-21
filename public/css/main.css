@@ -170,6 +170,13 @@
 }
 
 @media screen and (max-width:768px){
+
+    input[type="date"]{
+        min-width: 95%;
+    }
+    .carsWrapper{
+        padding: 0 0 12vh 0;
+    }
     .carCard{
         width: 300px;
         flex-direction: column;

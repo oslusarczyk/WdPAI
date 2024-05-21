@@ -136,4 +136,13 @@ select,input[type="date"] {
   border-radius: 5px;
   cursor: pointer;
   background-color: var(--input-color);
+  display: block;
+}
+
+input[type="date"]
+{
+    display:block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    min-height: 1.2em;
 }
