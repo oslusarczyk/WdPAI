@@ -10,7 +10,8 @@ class DefaultController extends AppController {
         if(!isset($_SESSION['user'])){
            return $this->render('login');
         }
-      return $this->render('main');
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/main");
     }
 
     public function error(){

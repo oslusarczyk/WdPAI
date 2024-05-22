@@ -18,10 +18,10 @@
         <div class="wrapper_main">
             <div class="confirmed_wrapper">
                 <?php if (empty($confirmed)): ?>
-                <p>Brak potwierdzonych rezerwacji</p>
+                <h2>Brak potwierdzonych rezerwacji</h2>
                 <?php else : ?>
                 <h2>Potwierdzone rezerwacje</h2>
-                <div class="confirmed_reservation_wrapper">
+                <div class="confirmed_reservation_wrapper grid_row">
                 <?php foreach ($confirmed as $reservation): ?>
                 <div class="carCard">
                     <div class="leftPart">
@@ -48,14 +48,12 @@
                     <?php endif ;?>
                                         
                 </div>
-
-            </div>
             <div class="pending_wrapper">
                 <?php if (empty($pending)): ?>
-                <p>Brak oczekujących rezerwacji</p>
+                <h2>Brak oczekujących rezerwacji</h2>
                 <?php else : ?>
                 <h2>Oczekujące rezerwacje</h2>
-                <div class="pending_reservation_wrapper">
+                <div class="pending_reservation_wrapper grid_row">
                 <?php foreach ($pending as $reservation): ?>
                 <div class="carCard">
                     <div class="leftPart">

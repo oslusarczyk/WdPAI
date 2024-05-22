@@ -27,7 +27,22 @@ body, h1, h2, h3, h4, h5, h6, p, ol, ul {
 h1, h2, h3, h4, h5, h6{
   font-weight: bold;
   text-transform: uppercase;
+  text-align: center;
 }
+
+h2{
+  padding: 20px 0 0;
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+@media screen and (max-width:768px){
+ h2{
+     margin-top: 5px;
+     font-size: 2rem;
+ }
+}
+
 
 ol, ul {
   list-style: none;
@@ -262,5 +277,27 @@ input[type="date"]
   .rightPart .price{
       width: 45%;
       font-size: 1.3rem;
+  }
+}
+
+.grid_row{
+  padding: 20px 10px;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  justify-items: center;
+  width: 100%;
+  min-height: 400px;
+  gap: 20px;
+}
+
+@media screen and (max-width:1500px){
+  .grid_row{
+      grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@media screen and (max-width:1024px){
+  .grid_row{
+      grid-template-columns: repeat(1,1fr);
   }
 }

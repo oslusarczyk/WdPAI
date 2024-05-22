@@ -14,8 +14,18 @@
         <a href="/history"><i class='bx bx-history'></i>
             <p>historia</p>
         </a>
+
+        <?php
+            if(isAdmin()){
+                echo '<a class="end" href="/carAdmin"><i class="bx bx-calendar"></i>
+                <p>rezerwacje</p>
+                 </a>';
+            };
+
+            ?>
         <a class="end" href="/logout"><i class='bx bx-log-out'></i>
             <p>wyloguj</p>
         </a>
+
     </div>
 </nav>

@@ -5,7 +5,7 @@ require_once 'src/controllers/ErrorController.php';
 require_once 'src/controllers/SecurityController.php';
 require_once 'src/controllers/CarsController.php';
 require_once 'src/controllers/HistoryController.php';
-
+require_once 'src/controllers/AdminController.php';
 class Router{
     public static $routes;
 

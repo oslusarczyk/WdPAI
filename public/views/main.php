@@ -34,7 +34,7 @@
             </div>
             <div class="mainPage">
                 <h2>Najpopularniejsze samochody</h2>
-                <div class="carsWrapper">
+                <div class="carsWrapper grid_row">
                     <?php foreach ($cars as $car): ?>
                     <div class="carCard">
                         <div class="leftPart">

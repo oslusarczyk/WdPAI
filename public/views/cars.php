@@ -87,7 +87,7 @@
 
 
                 <h2>Dostępne samochody</h2>
-                <div class="carsWrapper">
+                <div class="carsWrapper grid_row">
                 </div>
                 <div class="paginationWrapper"></div>
             </div>

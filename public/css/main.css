@@ -45,22 +45,6 @@
     text-align: center;
 }
 
-.mainPage h2{
-    margin-top: 25px;
-    font-size: 2.5rem;
-}
-
-.carsWrapper{
-    padding: 20px 10px;
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    justify-items: center;
-    width: 100%;
-    min-height: 400px;
-    gap: 20px;
-    position: relative;
-}
-
 .carsNotFound{
     position: absolute;
     top: 50%;
@@ -72,9 +56,6 @@
 }
 
 @media screen and (max-width:1500px){
-    .carsWrapper{
-        grid-template-columns: repeat(2,1fr);
-    }
 
     .form_wrapper{
         width: 40%;
@@ -92,9 +73,6 @@
 }
 
 @media screen and (max-width:1024px){
-    .carsWrapper{
-        grid-template-columns: repeat(1,1fr);
-    }
 
     .form_wrapper{
         width: 60%;
@@ -109,10 +87,6 @@
         min-width: 95%;
     }
     
-    .mainPage h2{
-        margin-top: 15px;
-        font-size: 1.5rem;
-    }
 
     .header{
         height: 30vh;
@@ -259,4 +233,14 @@
         padding: 0 0 12vh;
     }
     
+}
+
+@media screen and (max-width:400px){
+    .form_wrapper select{
+        width: 90%;
+    }
+
+    label{
+        font-size: 0.65rem;
+    }
 }

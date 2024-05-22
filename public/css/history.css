@@ -1,41 +1,10 @@
-.confirmed_wrapper h2, .pending_wrapper h2{
-    padding: 20px 0 0;
-    text-align: center;
-    font-size: 2.5rem;
-}
 
-.confirmed_reservation_wrapper, .pending_reservation_wrapper{
-    padding: 20px 10px;
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    justify-items: center;
-    width: 100%;
-    min-height: 400px;
-    gap: 20px;
-}
-
-
-@media screen and (max-width:1500px){
-    .confirmed_reservation_wrapper, .pending_reservation_wrapper{
-        grid-template-columns: repeat(2,1fr);
-    }
-}
-
-@media screen and (max-width:1024px){
-    .confirmed_reservation_wrapper, .pending_reservation_wrapper{
-        grid-template-columns: repeat(1,1fr);
-    }
-}
 
 
 @media screen and (max-width:768px){
 
     .pending_reservation_wrapper{
         padding: 0 0 12vh 0;
-    }
-
-    .carCard h4{
-        text-align: center;
     }
 
     .carCard p{
