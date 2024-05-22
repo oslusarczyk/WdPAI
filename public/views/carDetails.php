@@ -31,7 +31,7 @@
                         ?>
                     </p>
                     <p class="seats">
-                        <i class='bx bx-calendar'></i>
+                        <i class='bx bx-body'></i>
                         <?php
                                 $seats = $car['seats_available'];
                                 $text = "osoby";
@@ -42,7 +42,7 @@
                                 ?>
                     </p>
                     <p class="productionYear">
-                        <i class='bx bx-body'></i>
+                        <i class='bx bx-calendar'></i>
                         <?= $car['production_year']?>
                     </p>
                     <p class="price">

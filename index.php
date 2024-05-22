@@ -13,7 +13,7 @@ $path = parse_url( $path, PHP_URL_PATH);
 if(isset($_SESSION['user'])){
     Router::get('main','CarsController');
     Router::get('cars','CarsController');
-    Router::get('history','CarsController');
+    Router::get('history','HistoryController');
     Router::get('carDetails','CarsController');
     Router::get('logout','SecurityController');
 }

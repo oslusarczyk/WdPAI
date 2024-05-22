@@ -146,3 +146,121 @@ input[type="date"]
     -moz-appearance: none;
     min-height: 1.2em;
 }
+
+.wrapper_main{
+  margin-left: var(--width);
+  width: calc(100% - var(--width));
+}
+
+.carCard{
+  overflow: hidden;
+  width: 400px;
+  display: flex;
+  border: 1px solid black;
+  border-radius: 10px;
+  height: 250px;
+}
+
+.carCard .leftPart,.carCard .rightPart{
+  width: 50%;
+}
+
+.carCard .leftPart {
+  border-right: 2px solid black;
+}
+
+.carCard .leftPart img{
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.carCard .rightPart{
+  background-color: #fff;
+  justify-content: space-between;
+  padding: 10px 5px;
+}
+
+
+.rightPart .buttonClass{
+  margin-top: 0;
+  font-size: 1.3rem;
+  padding: 10px 5px;
+}
+
+.rightPart p{
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+}
+
+
+.rightPart i{
+  margin-right: 20px;
+  font-size: 1.5rem;
+}
+
+.rightPart .price{
+  font-weight: bold;
+  font-size: 1.4rem;
+  align-self: center;
+}
+
+.rightPart .buttonClass a{
+  display: block;
+  color: white;
+}
+
+@media screen and (max-width:768px){
+  .wrapper_main{
+    margin-left: 0;
+    width: 100vw;
+}
+
+  .carCard{
+      width: 300px;
+      flex-direction: column;
+      height: 250px;
+  }
+  
+  .carCard .leftPart,.carCard .rightPart{
+      width: 100%;
+      height: 50%;
+  }
+
+  .carCard .leftPart img{
+     width: 100%;
+  }
+
+  .carCard .leftPart{
+      height: 35%;
+      border-right: 0;
+      border-bottom: 2px solid black;
+  }
+
+  .carCard .rightPart{
+      height: 65%;
+      flex-wrap: wrap;
+      flex-direction: row;
+      padding: 5px;
+  }
+
+  .carCard h4{
+      width: 100%;
+      font-size: 1.2rem;
+  }
+
+  .carCard p, .carCard .buttonClass{
+      width: 50%;
+      font-size: 0.9rem;
+  }
+
+  .carCard .buttonClass{
+      width: 55%;
+  }
+
+  .rightPart .price{
+      width: 45%;
+      font-size: 1.3rem;
+  }
+}

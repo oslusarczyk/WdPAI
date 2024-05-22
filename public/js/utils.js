@@ -10,7 +10,6 @@ if(closeModal){
 }
 
 navLinks.forEach(navLink => {
-    console.log(currentPageLink, navLink.href)
     if(currentPageLink === navLink.href){
         navLink.classList.add("active")
     }
