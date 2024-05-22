@@ -1,7 +1,7 @@
 const closeModal = document.querySelector(".close_modal");
 const nav = document.querySelector("nav")
 const navLinks = document.querySelectorAll(".navParts a")
-const currentPageLink = window.location.href;
+const currentPageLink = window.location.href.split("?")[0];
 
 if(closeModal){
     closeModal.addEventListener("click", (event) => {
@@ -10,6 +10,7 @@ if(closeModal){
 }
 
 navLinks.forEach(navLink => {
+    console.log(currentPageLink, navLink.href)
     if(currentPageLink === navLink.href){
         navLink.classList.add("active")
     }
