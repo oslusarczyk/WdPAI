@@ -1,3 +1,10 @@
+<?php
+    if(isset($_SESSION['user'])){
+        $user = unserialize($_SESSION['user']);
+        $user_id = $user->getId();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +16,7 @@
     <link rel="icon" type="image/x-icon" href="public/img/smartcar_logo.ico">
     <link rel="stylesheet" type="text/css" href="public/css/basic_styling.css">
     <link rel="stylesheet" type="text/css" href="public/css/car_details.css">
-    <script src="public/js/searchCars.js" defer></script>
+    <script src="public/js/reservation.js" defer></script>
     <title>OPIS SAMOCHODU</title>
 </head>
 
@@ -56,24 +63,26 @@
                 <h2>Opis</h2>
                 <p><?= $car['car_description'] ;?></p>
                 <div class="reservation_form">
-                    <form action="" method="POST">
+                    <form action="/makeReservation" method="POST">
                         <label for="reservation_start_date">Od
-                            <input type="date" name="reservation_start_date" id="reservation_start_date">
+                            <input type="date" name="reservation_start_date" id="reservation_start_date" min="<?= date('Y-m-d'); ?>" >
                         </label>
                         <label for="reservation_end_date">Do
                             <input type="date" name="reservation_end_date" id="reservation_end_date">
                         </label>
                         <label for="location_select">Miejsce wynajmu
-                            <select name="location" id="location_select">
-                                <option value="">Wszystkie</option>
+                            <select name="location_id" id="location_select">
+                                <option value=""></option>
                                 <?php foreach ($locations as $location): ?>
-                                <option value="<?= $location->getLocationName(); ?>">
+                                <option value="<?= $location->getLocationId(); ?>">
                                     <?= $location->getLocationName(); ?>
                                 </option>
                                 <?php endforeach; ?>
                             </select>
                         </label>
-                        <button class="buttonClass">
+                        <input type="hidden" name="car_id" value="<?= $car['car_id']; ?>">
+                        <input type="hidden" name="user_id" value="<?= $user_id ?>">
+                        <button type="submit"  class="buttonClass">
                             Zarezerwuj
                         </button>
                     </form>

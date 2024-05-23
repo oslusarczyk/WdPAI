@@ -16,15 +16,17 @@ function isAdmin() : bool{
     }
     $user = unserialize($_SESSION['user']);
     return $user->getHasAdminPrivileges();
-    var_dump(unserialize($_SESSION['user']));
 }
 
 if(isset($_SESSION['user'])){
     Router::get('main','CarsController');
     Router::get('cars','CarsController');
-    Router::get('history','HistoryController');
+    Router::get('history','ReservationController');
     Router::get('carDetails','CarsController');
     Router::get('logout','SecurityController');
+
+    Router::post('filterCars','CarsController');
+    Router::post('makeReservation','ReservationController');
 }
 
 if(isAdmin()){
@@ -34,7 +36,6 @@ Router::get('', 'DefaultController');
 
 Router::post('login','SecurityController');
 Router::post('register','SecurityController');
-Router::post('filterCars','CarsController');
 Router::get('error','DefaultController');
 
 

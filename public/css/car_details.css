@@ -107,6 +107,7 @@ label{
 
     .reservation_form {
         width: 90%;
+        padding: 0 0 10vh;
     }
 
 
@@ -133,7 +134,7 @@ label{
     .reservation_form form{
         display: flex;
         flex-direction: column;
-        padding: 0 0 10vh;
+
     }
 
     button{
@@ -142,4 +143,10 @@ label{
     }
 }
 
+@media screen and (max-width: 400px){
+    .car_details{
+        padding: 10px 30px;
+        height: 25vh;
+    }
+}
 

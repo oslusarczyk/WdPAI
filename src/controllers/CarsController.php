@@ -65,11 +65,6 @@ class CarsController extends AppController
         }
     }
 
-    public function history ()
-    {
-        return $this->render('history');
-
-    }
 
     public function carDetails(){
         if(!$this->isGet()){

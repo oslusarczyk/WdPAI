@@ -68,7 +68,7 @@
                             </p>
                             <p class="price">od <?= $car->getPricePerDay(); ?> PLN</p>
                             <button class="buttonClass">
-                                <a href="carDetails?id=<?=$car->getId(); ?>">
+                                <a href="/carDetails?id=<?=$car->getId(); ?>">
                                     Zobacz więcej
                                 </a>
                             </button>

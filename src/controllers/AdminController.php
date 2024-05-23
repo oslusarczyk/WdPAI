@@ -7,9 +7,7 @@ require_once __DIR__.'/../models/Reservation.php';
 class AdminController extends AppController
 
 {
-
     private $reservationRepository;
-
     public function __construct(){
         parent::__construct();
         $this->reservationRepository = new ReservationRepository();
@@ -24,7 +22,7 @@ class AdminController extends AppController
         }
 
         $reservationsToManage = $this->reservationRepository->getPendingReservations();
-        $this->render("carAdmin",['reservations' => $reservationsToManage]);
+        return $this->render("carAdmin",['reservations' => $reservationsToManage]);
     }
 
 

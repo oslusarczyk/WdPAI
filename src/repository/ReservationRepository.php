@@ -39,5 +39,17 @@ class ReservationRepository extends Repository{
     
             return $result;
             }
+
+
+
+            public function addReservation(string $reservation_end_date, string $reservation_start_date, int $location_id, int $car_id, int $user_id) : void{
+                $this->database->connect();
+                $stmt = $this->database->getConnection()->prepare("
+               INSERT INTO reservations(user_id, car_id, location_id, reservation_start_date, reservation_end_date)
+	                VALUES (?,?,?,?,?);
+            ");
+                $stmt->execute([$user_id, $car_id, $location_id, $reservation_start_date, $reservation_end_date]);
+                $this->database->disconnect();
+            }
 }
 ?>
