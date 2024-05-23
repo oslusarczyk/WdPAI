@@ -19,10 +19,9 @@ class AppController {
     }
     
 
-    public function render(string $template = null, array $variables = [])
+    protected function render(string $template = null, array $variables = [])
     {
         $templatePath = 'public/views/'. $template.'.php';
-        $output = 'File not found';
 
         if(!file_exists($templatePath)){
             $templatePath = 'public/views/error.php';

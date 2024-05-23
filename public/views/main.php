@@ -19,22 +19,22 @@
             <div class="header flex-column">
                 <div class="form_wrapper flex-column">
                     <h3>Wynajmij auto</h3>
-                    <form class="flex-column" action="" method="POST">
+                    <form class="flex-column" action="/cars" method="GET">
                         <label for="location_select">Miejsce wynajmu
-                        </label>
                         <select name="location" id="location_select">
                             <?php foreach ($locations as $location): ?>
                             <option value="<?= $location->getLocationName(); ?>"><?= $location->getLocationName(); ?>
                             </option>
                             <?php endforeach; ?>
                         </select>
+                        </label>
                         <button type="submit">Szukaj</button>
                     </form>
                 </div>
             </div>
             <div class="mainPage">
-                <h2>Najpopularniejsze auta</h2>
-                <div class="carsWrapper">
+                <h2>Najpopularniejsze samochody</h2>
+                <div class="carsWrapper grid_row">
                     <?php foreach ($cars as $car): ?>
                     <div class="carCard">
                         <div class="leftPart">
@@ -68,7 +68,7 @@
                             </p>
                             <p class="price">od <?= $car->getPricePerDay(); ?> PLN</p>
                             <button class="buttonClass">
-                                <a href="/$id=<?=$car->getId(); ?>">
+                                <a href="/carDetails?id=<?=$car->getId(); ?>">
                                     Zobacz więcej
                                 </a>
                             </button>

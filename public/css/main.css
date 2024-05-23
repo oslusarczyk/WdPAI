@@ -1,15 +1,11 @@
 
-.wrapper_main{
-    margin-left: var(--width);
-    width: calc(100% - var(--width));
-}
-
 .header{
     height: 25vh;
     background-image: linear-gradient(rgba(255,255,255,0.67), rgba(255,255,255,0.67)), url('/public/img/car_logo.jpg');
     background-position: center;
     background-size: inherit;
     align-items: center;
+    justify-content: center;
 }
 
 .form_wrapper{
@@ -24,10 +20,6 @@
     align-items: center;
 }
 
-.form_wrapper label{
-    font-weight: 300;
-    display: block;
-}
 
 .form_wrapper form{
     margin-top: 15px;
@@ -47,98 +39,23 @@
   }
 
 
-  #location_select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: var(--input-color);
-}
-
 .mainPage{
     max-height: 73vh;
     padding: 20px;
     text-align: center;
 }
 
-.mainPage h2{
-    margin-top: 25px;
-    font-size: 2.5rem;
-}
-
-.carsWrapper{
-    padding: 20px 10px  ;
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    justify-items: center;
-    width: 100%;
-    height: 100%;
-    gap: 20px;
-}
-
-.carCard{
-    overflow: hidden;
-    width: 400px;
-    display: flex;
-    border: 1px solid black;
-    border-radius: 10px;
-    height: 250px;
-}
-
-.carCard .leftPart,.carCard .rightPart{
-    width: 50%;
-}
-
-.carCard .leftPart {
-    border-right: 2px solid black;
-}
-
-.carCard .leftPart img{
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
-}
-
-.carCard .rightPart{
-    background-color: #fff;
-    justify-content: space-between;
-    padding: 10px 5px;
-}
-
-
-.rightPart .buttonClass{
-    margin-top: 0;
-    font-size: 1.3rem;
-    padding: 10px 5px;
-}
-
-.rightPart p{
-    font-size: 1.3rem;
-    display: flex;
-    align-items: center;
-}
-
-
-.rightPart i{
-    margin-right: 20px;
+.carsNotFound{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     font-size: 1.5rem;
-}
-
-.rightPart .price{
-    font-weight: bold;
-    font-size: 1.4rem;
-    align-self: center;
-}
-
-.rightPart .buttonClass a{
-    display: block;
-    color: white;
+    text-align: center;
+    margin-top: 2rem;
 }
 
 @media screen and (max-width:1500px){
-    .carsWrapper{
-        grid-template-columns: repeat(2,1fr);
-    }
 
     .form_wrapper{
         width: 40%;
@@ -153,14 +70,9 @@
         padding: 10px;
         font-size: 1rem;
     }
-  
-
 }
 
 @media screen and (max-width:1024px){
-    .carsWrapper{
-        grid-template-columns: repeat(1,1fr);
-    }
 
     .form_wrapper{
         width: 60%;
@@ -170,62 +82,11 @@
 }
 
 @media screen and (max-width:768px){
-    .carCard{
-        width: 300px;
-        flex-direction: column;
-        height: 250px;
+
+     input[type="date"]{
+        min-width: 95%;
     }
     
-    .carCard .leftPart,.carCard .rightPart{
-        width: 100%;
-        height: 50%;
-    }
-
-    .carCard .leftPart img{
-       width: 100%;
-    }
-
-    .carCard .leftPart{
-        height: 35%;
-        border-right: 0;
-        border-bottom: 2px solid black;
-    }
-
-    .carCard .rightPart{
-        height: 65%;
-        flex-wrap: wrap;
-        flex-direction: row;
-        padding: 5px;
-    }
-
-    .carCard h4{
-        width: 100%;
-        font-size: 1.2rem;
-    }
-
-    .carCard p, .carCard .buttonClass{
-        width: 50%;
-        font-size: 0.9rem;
-    }
-
-    .carCard .buttonClass{
-        width: 55%;
-    }
-
-    .rightPart .price{
-        width: 45%;
-        font-size: 1.3rem;
-    }
-
-    .mainPage h2{
-        margin-top: 15px;
-        font-size: 1.5rem;
-    }
-
-    .wrapper_main{
-        margin-left: 0;
-        width: 100vw;
-    }
 
     .header{
         height: 30vh;
@@ -260,5 +121,126 @@
   @media screen and (max-width:460px){
     .form_wrapper{
         font-size: 1.2rem;
+    }
+}
+
+
+.search{
+    width: 70%;
+}
+
+.search form{
+    flex-direction: row;
+    width: 80%;
+}
+
+.price_min {
+    margin-right: 30px;
+}
+
+
+.price_range {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 8px;
+}
+
+
+.search label input{
+    margin-top: 10px;
+    width: 50%;
+    padding: 5px 10px;
+}
+
+@media screen and (max-width:1500px){
+
+    .search{
+        width: 85%;
+    }
+
+    .search form {
+        width: 100%;
+    }
+    
+}
+
+@media screen and (max-width:1216px){
+    .search{
+        width: 95%;
+        font-size: 1.3rem;
+    }
+
+    .search form{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+    }
+}
+
+
+@media screen and (max-width:768px){
+    .form_wrapper select{
+        width: 90%
+    }
+
+    label{
+        font-size: 1.2rem;
+    }
+}
+
+@media screen and (max-width:544px){
+    .form_wrapper select{
+        width: 85%;
+        font-size: 0.8rem;
+    }
+
+    label{
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width:460px){
+    .form_wrapper select{
+        width: 95%;
+    }
+
+    label{
+        font-size: 0.75rem;
+    }
+}
+
+.paginationWrapper{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px 10px;
+}
+
+.pageButton{
+    background-color: var(--input-color);
+    transition: none;
+}
+
+.pageButton.active{
+    background-color: var(--main-color);
+}
+
+@media screen and (max-width:768px){
+    .paginationWrapper{
+        padding: 0 0 12vh;
+    }
+    
+}
+
+@media screen and (max-width:400px){
+    .form_wrapper select{
+        width: 90%;
+    }
+
+    label{
+        font-size: 0.65rem;
     }
 }

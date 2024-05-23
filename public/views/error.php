@@ -9,6 +9,6 @@
     <title>ERROR</title>
 </head>
 <body>
-<h1>Brak uprawnień lub zły adres strony <a style="font-weight:bold" href="/">Wróć na stronę główną.</a></h1>
+<h1>Brak uprawnień lub zły adres strony <a style="font-weight:bold; text-decoration: underline" href="/">Wróć na stronę główną.</a></h1>
 </body>
 </html>

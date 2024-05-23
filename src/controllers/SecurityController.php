@@ -11,6 +11,7 @@ class SecurityController extends AppController
     public function __construct(){
         parent::__construct();
         $this->userRepository = new UserRepository();
+
     }
 
     public function login()
@@ -43,19 +44,6 @@ class SecurityController extends AppController
         return $this->render('main');
 
     }
-
-    public function cars()
-    {
-        return $this->render('cars');
-
-    }
-
-    public function history ()
-    {
-        return $this->render('history');
-
-    }
-
 
 
     public function register()
