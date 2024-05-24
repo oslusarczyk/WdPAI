@@ -26,7 +26,7 @@
                     <?php foreach ($reservations as $reservation): ?>
                     <div class="carCard" id="<?= $reservation->getReservationId(); ?>">
                         <div class="leftPart">
-                            <img src="public/img/<?= $reservation->getPhoto(); ?>" alt="car image">
+                            <img src="public/img/uploads/<?= $reservation->getPhoto(); ?>" alt="car image">
                         </div>
                         <div class="rightPart flex-column">
                             <h4 class="carName"><?= $reservation->getCarName()?></h4>

@@ -99,7 +99,30 @@ a{
   html{
    font-size: 18px;
  }
-} 
+}
+
+.message{
+    background-color: var(--main-color);
+    padding: 25px 10px;
+    border-radius: 10px;
+    color: white;
+    position: absolute;
+    bottom:2%;
+    right:2%;
+    visibility: hidden;
+
+}
+
+.close_modal{
+    position: absolute;
+    top:5%;
+    right: 5%;
+    cursor: pointer;
+}
+
+.message.visible{
+    visibility: visible;
+}
 
 
 
@@ -152,7 +175,7 @@ input::-webkit-inner-spin-button {
 }
 
 
-select,input[type="date"] {
+select,input,textarea {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -160,7 +183,9 @@ select,input[type="date"] {
   background-color: var(--input-color);
   display: block;
 }
-
+textarea{
+    resize: none;
+}
 input[type="date"]
 {
     display:block;

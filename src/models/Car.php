@@ -1,28 +1,28 @@
 <?php
-    class Car {
-        private $id;
-        private $brand;
-        private $model;
-        private $price_per_day;
-        private $seats_available;
-        private $photo;
-        private $locations;
-        private $production_year;
-        private $car_description;
+class Car {
+    private $id;
+    private $brand;
+    private $model;
+    private $price_per_day;
+    private $seats_available;
+    private $photo;
+    private $locations;
+    private $production_year;
+    private $car_description;
 
-        public function __construct(string $brand, string $model, int $price_per_day, int $seats_available, string $photo, string $locations,int $id, int $production_year = null, string $car_description = null,){
-            $this->id = $id;
-            $this->brand = $brand;
-            $this->model = $model;
-            $this->price_per_day = $price_per_day;
-            $this->seats_available = $seats_available;
-            $this->photo = $photo;
-            $this->locations = $locations;
-            $this->production_year = $production_year;
-            $this->car_description = $car_description;
+    public function __construct(string $brand, string $model, int $price_per_day, int $seats_available, string $photo, string $locations,int $id=0, int $production_year = 0, string $car_description = null){
+        $this->id = $id;
+        $this->brand = $brand;
+        $this->model = $model;
+        $this->price_per_day = $price_per_day;
+        $this->seats_available = $seats_available;
+        $this->photo = $photo;
+        $this->locations = $locations;
+        $this->production_year = $production_year;
+        $this->car_description = $car_description;
     }
 
-        public function getId(): int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -67,5 +67,5 @@
         return $this->car_description;
     }
 
-    }
+}
 ?>

@@ -36,4 +36,56 @@ p.reservation_email{
         margin-top: 0;
         font-size: 1.2rem;
     }
-} 
+}
+
+.wrapper_main{
+    align-items: center;
+}
+
+.form_wrapper{
+    margin-top:5vh;
+    padding: 15px 20px;
+    width: 80%;
+    border-radius: 10px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.55)
+}
+
+.form_wrapper form{
+    padding: 10px;
+    align-items: center;
+    gap: 10px;
+}
+
+.form_wrapper form label{
+    width: 100%
+}
+
+.form_wrapper form button{
+    width: 50%;
+}
+
+.checkbox{
+    width: 100%;
+}
+
+.checkbox span{
+    font-weight: 300;
+}
+
+.form_wrapper form .checkbox_wrapper label{
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width:768px){
+    .wrapper_main{
+        padding: 0 0 12vh 0;
+    }
+    .form_wrapper{
+        width: 90%;
+    }
+
+    .checkbox_wrapper{
+        flex-wrap: wrap;
+    }
+}

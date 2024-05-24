@@ -27,17 +27,20 @@ if(isset($_SESSION['user'])){
 
     Router::post('filterCars','CarsController');
     Router::post('makeReservation','ReservationController');
-    Router::post("handleReservation", 'AdminController');
+
 }
 
 if(isAdmin()){
     Router::get('carAdmin','AdminController');
+    Router::get('addCar','AdminController');
+    Router::post('handleReservation', 'AdminController');
 }
 Router::get('', 'DefaultController');
+Router::get('error','DefaultController');
 
 Router::post('login','SecurityController');
 Router::post('register','SecurityController');
-Router::get('error','DefaultController');
+
 
 
 
