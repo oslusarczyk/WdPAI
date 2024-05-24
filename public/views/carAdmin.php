@@ -9,6 +9,7 @@
     <link rel="icon" type="image/x-icon" href="public/img/smartcar_logo.ico">
     <link rel="stylesheet" type="text/css" href="public/css/basic_styling.css">
     <link rel="stylesheet" type="text/css" href="public/css/carAdmin.css">
+    <script src="public/js/adminReservation.js" defer></script>
     <title>REZERWACJE - ADMIN</title>
 </head>
 
@@ -18,12 +19,12 @@
         <div class="wrapper_main">
             <div class="reservation_wrapper">
                 <?php if (empty($reservations)): ?>
-                <h2>Brak potwierdzonych rezerwacji</h2>
+                <h2>Brak rezerwacji do potwierdzenia</h2>
                 <?php else : ?>
-                <h2>Potwierdzone rezerwacje</h2>
+                <h2>Rezerwacje do potwierdzenia</h2>
                 <div class="pending_reservation_wrapper grid_row">
                     <?php foreach ($reservations as $reservation): ?>
-                    <div class="carCard">
+                    <div class="carCard" id="<?= $reservation->getReservationId(); ?>">
                         <div class="leftPart">
                             <img src="public/img/<?= $reservation->getPhoto(); ?>" alt="car image">
                         </div>
@@ -47,8 +48,8 @@
                             </p>
                             <p class="price"><?= $reservation->getReservationPrice(); ?> PLN</p>
                             <div class="button_wrapper flex-row">
-                            <button class="cancel">&#10005;</button>
-                            <button class="confirm">&#10004;</button>
+                            <button class="cancel" data-action="cancelled" >&#10005;</button>
+                            <button class="confirm" data-action="confirmed">&#10004;</button>
                             </div>
 
                         </div>

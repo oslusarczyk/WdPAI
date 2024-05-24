@@ -27,6 +27,7 @@ if(isset($_SESSION['user'])){
 
     Router::post('filterCars','CarsController');
     Router::post('makeReservation','ReservationController');
+    Router::post("handleReservation", 'AdminController');
 }
 
 if(isAdmin()){

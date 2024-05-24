@@ -51,5 +51,19 @@ class ReservationRepository extends Repository{
                 $stmt->execute([$user_id, $car_id, $location_id, $reservation_start_date, $reservation_end_date]);
                 $this->database->disconnect();
             }
+
+    public function updateReservationStatus(string $action, int $reservation_id)
+    {
+        $this->database->connect();
+        $stmt = $this->database->getConnection()->prepare("
+               UPDATE reservations
+               SET reservation_status=:action
+               WHERE reservation_id=:id;
+            ");
+        $stmt->bindParam(':action', $action, PDO::PARAM_STR);
+        $stmt->bindParam(':id', $reservation_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $this->database->disconnect();
+    }
 }
 ?>
