@@ -26,9 +26,7 @@
                                 <option value="">Wszystkie</option>
                                 <?php foreach ($locations as $location): ?>
                                 <option value="<?= $location->getLocationName(); ?>"
-                                    <?= $location->getLocationName() == $selectedLocation ? 'selected' : ''; ?>>
-                                    <?= $location->getLocationName(); ?>
-                                </option>
+                                    <?= $location->getLocationName() == $selectedLocation ? 'selected' : ''; ?>><?= $location->getLocationName(); ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </label>
@@ -36,8 +34,7 @@
                             <select name="brand" id="brand_select">
                                 <option value="">Wszystkie</option>
                                 <?php foreach ($brands as $brand): ?>
-                                <option value="<?= $brand->getBrandName(); ?>"><?= $brand->getBrandName();; ?>
-                                </option>
+                                <option value="<?= $brand->getBrandName(); ?>"><?= $brand->getBrandName();; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </label>

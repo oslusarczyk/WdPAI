@@ -80,5 +80,44 @@ class CarRepository extends Repository{
             return $stmt->fetch(PDO::FETCH_ASSOC);
 
         }
+
+    public function addCar(Car $car, array $locations)
+    {
+        $this->database->connect();
+        try{
+            $this->database->getConnection()->beginTransaction();
+            $stmt = $this->database->getConnection()->prepare('
+        INSERT INTO cars (brand_id, model, price_per_day, seats_available, photo, production_year, car_description)
+        VALUES (?,?,?,?,?,?,?)
+        RETURNING car_id
+    ');
+            $stmt->execute([
+                $car->getBrand(),
+                $car->getModel(),
+                $car->getPricePerDay(),
+                $car->getSeatsAvailable(),
+                $car->getPhoto(),
+                $car->getProductionYear(),
+                $car->getCarDescription()
+            ]);
+            $car_id = $stmt->fetchColumn();
+            $locationStmt = $this->database->getConnection()->prepare('
+        INSERT INTO cars_locations (car_id, location_id)
+        VALUES (?, ?)
+        ');
+
+            foreach ($locations as $location) {
+                $locationStmt->execute([$car_id, intval($location)]);
+            }
+
+            $this->database->getConnection()->commit();
+            $this->database->disconnect();
+        } catch (Exception $e){
+            $this->database->getConnection()->rollBack();
+            $this->database->disconnect();
+            throw $e;
+        }
+
+    }
 }
 ?>

@@ -23,8 +23,7 @@
                         <label for="location_select">Miejsce wynajmu
                         <select name="location" id="location_select">
                             <?php foreach ($locations as $location): ?>
-                            <option value="<?= $location->getLocationName(); ?>"><?= $location->getLocationName(); ?>
-                            </option>
+                            <option value="<?= $location->getLocationName(); ?>"><?= $location->getLocationName(); ?></option>
                             <?php endforeach; ?>
                         </select>
                         </label>
@@ -38,7 +37,7 @@
                     <?php foreach ($cars as $car): ?>
                     <div class="carCard">
                         <div class="leftPart">
-                            <img src="public/img/<?= $car->getPhoto(); ?>" alt="car image">
+                            <img src="public/img/uploads/<?= $car->getPhoto(); ?>" alt="car image">
                         </div>
                         <div class="rightPart flex-column">
                             <h4 class="carName"><?= $car->getBrand()." ".$car->getModel()?></h4>

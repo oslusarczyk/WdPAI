@@ -100,7 +100,7 @@ function createCarCard(car) {
     const carPrice = clone.querySelector(".price");
     const carHref = clone.querySelector("a");
 
-    img.src = "public/img/" + car.photo;
+    img.src = "public/img/uploads/" + car.photo;
 
     carName.innerHTML = car.brand_name + " " + car.model;
     const carLocationsLength = car.locations.split(",").length;

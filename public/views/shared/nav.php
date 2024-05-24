@@ -20,6 +20,9 @@
                 echo '<a class="end" href="/carAdmin"><i class="bx bx-calendar"></i>
                 <p>rezerwacje</p>
                  </a>';
+                echo '<a class="end" href="/addCar"><i class="bx bx-car"></i>
+                <p>dodawanie</p>
+                 </a>';
             };
 
             ?>

@@ -26,7 +26,7 @@
         <div class="wrapper_main">
             <div class="details_wrapper">
                 <div class="car_image">
-                    <img src="public/img/<?= $car['photo']; ?>" alt="car image">
+                    <img src="public/img/uploads/<?= $car['photo']; ?>" alt="car image">
                 </div>
                 <div class="car_details flex-column">
                     <h3><?= $car['brand_name']." ".$car['model']?></h3>
