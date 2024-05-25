@@ -43,6 +43,13 @@ h2{
  }
 }
 
+@media screen and (max-width:544px){
+  h2{
+      margin-top: 5px;
+      font-size: 1.8rem;
+  }
+ }
+
 
 ol, ul {
   list-style: none;
@@ -193,6 +200,19 @@ input[type="date"]
     -moz-appearance: none;
     min-height: 1.2em;
 }
+
+input::file-selector-button {
+  cursor: pointer;
+  background-color: var(--main-color);
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 10px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
 
 .wrapper_main{
   margin-left: var(--width);

@@ -81,11 +81,20 @@ p.reservation_email{
     .wrapper_main{
         padding: 0 0 12vh 0;
     }
+
+    input::file-selector-button {
+        font-size: 1rem;
+      }
+
     .form_wrapper{
         width: 90%;
     }
 
     .checkbox_wrapper{
         flex-wrap: wrap;
+    }
+
+    .form_wrapper form button{
+        width: 80%;
     }
 }
