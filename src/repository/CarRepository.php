@@ -1,9 +1,15 @@
 <?php
 
 require_once 'Repository.php';
-require_once __DIR__.'/../models/Car.php';
+require_once __DIR__.'/../models/ICar.php';
+require_once __DIR__.'/../models/CarBuilder.php';
+require_once 'ICarRepository.php';
 
-class CarRepository extends Repository{
+class CarRepository extends Repository implements ICarRepository {
+    public function __construct(IDatabase $database)
+    {
+        parent::__construct($database);
+    }
     public function getAllCars(string $location = null, string $brand = null, int $seats = null, int $minPrice = null, int $maxPrice = null) : array{
     $this->database->connect();
 
@@ -47,23 +53,33 @@ class CarRepository extends Repository{
 
     public function getMostPopularCars() : array{
         $this->database->connect();
-        $stmt = $this->database->getConnection()->prepare('
+        $stmt = $this->database->getConnection()->prepare("
         SELECT all_cars.*, reservation_counts.reservation_count
         FROM public.all_cars
         LEFT JOIN (
             SELECT car_id, COUNT(*) AS reservation_count
             FROM reservations
+            WHERE reservation_status='confirmed'
             GROUP BY car_id
         ) AS reservation_counts
         ON all_cars.car_id = reservation_counts.car_id
         ORDER BY reservation_count DESC NULLS LAST
         LIMIT 3;
-        ');
+        ");
         $stmt->execute();
         $this->database->disconnect();
         $cars = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($cars as $car) {
-            $result[] = new Car($car['brand_name'],$car['model'],$car['price_per_day'],$car['seats_available'],$car['photo'],$car['locations'],$id=$car['car_id']);
+
+            $result[] = (new CarBuilder())
+                ->setBrand($car['brand_name'])
+                ->setModel($car['model'])
+                ->setPricePerDay($car['price_per_day'])
+                ->setSeatsAvailable($car['seats_available'])
+                ->setPhoto($car['photo'])
+                ->setLocations($car['locations'])
+                ->setId($car['car_id'])
+                ->build();
         }
         return $result;
         }
@@ -77,11 +93,11 @@ class CarRepository extends Repository{
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
             $this->database->disconnect();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-
+            $car = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $car ?: [];
         }
 
-    public function addCar(Car $car, array $locations)
+    public function addCar(ICar $car, array $locations) : void
     {
         $this->database->connect();
         try{
@@ -117,7 +133,6 @@ class CarRepository extends Repository{
             $this->database->disconnect();
             throw $e;
         }
-
     }
 }
 ?>

@@ -1,9 +1,14 @@
 <?php
 
 require_once 'Repository.php';
-require_once __DIR__.'/../models/Reservation.php';
+require_once __DIR__.'/../models/ReservationBuilder.php';
+require_once 'IReservationRepository.php';
 
-class ReservationRepository extends Repository{
+class ReservationRepository extends Repository implements IReservationRepository {
+    public function __construct(IDatabase $database)
+    {
+        parent::__construct($database);
+    }
     public function getRepositoryByEmail(string $email, string $status) :array{
         $this->database->connect();
             $stmt = $this->database->getConnection()->prepare('
@@ -17,7 +22,17 @@ class ReservationRepository extends Repository{
         $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $result = [];
         foreach ($reservations as $reservation) {
-            $result[] = new Reservation($reservation['car_name'],$reservation['location_name'],$reservation['photo'],$reservation['reservation_start_date'],$reservation['reservation_end_date'],$reservation['reservation_price'],$reservation['reservation_status'],$reservation['email'],$reservation['reservation_id']);
+            $result[] = (new ReservationBuilder())
+                ->setCarName($reservation['car_name'])
+                ->setLocationName($reservation['location_name'])
+                ->setPhoto($reservation['photo'])
+                ->setReservationStartDate($reservation['reservation_start_date'])
+                ->setReservationEndDate($reservation['reservation_end_date'])
+                ->setReservationPrice($reservation['reservation_price'])
+                ->setReservationStatus($reservation['reservation_status'])
+                ->setEmail($reservation['email'])
+                ->setReservationId($reservation['reservation_id'])
+                ->build();
         }
 
         return $result;
@@ -34,13 +49,21 @@ class ReservationRepository extends Repository{
             $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $result = [];
             foreach ($reservations as $reservation) {
-                $result[] = new Reservation($reservation['car_name'],$reservation['location_name'],$reservation['photo'],$reservation['reservation_start_date'],$reservation['reservation_end_date'],$reservation['reservation_price'],$reservation['reservation_status'],$reservation['email'],$reservation['reservation_id']);
+                $result[] = (new ReservationBuilder())
+                    ->setCarName($reservation['car_name'])
+                    ->setLocationName($reservation['location_name'])
+                    ->setPhoto($reservation['photo'])
+                    ->setReservationStartDate($reservation['reservation_start_date'])
+                    ->setReservationEndDate($reservation['reservation_end_date'])
+                    ->setReservationPrice($reservation['reservation_price'])
+                    ->setReservationStatus($reservation['reservation_status'])
+                    ->setEmail($reservation['email'])
+                    ->setReservationId($reservation['reservation_id'])
+                    ->build();
             }
     
             return $result;
             }
-
-
 
             public function addReservation(string $reservation_end_date, string $reservation_start_date, int $location_id, int $car_id, int $user_id) : void{
                 $this->database->connect();
@@ -52,7 +75,7 @@ class ReservationRepository extends Repository{
                 $this->database->disconnect();
             }
 
-    public function updateReservationStatus(string $action, int $reservation_id)
+    public function updateReservationStatus(string $action, int $reservation_id) : void
     {
         $this->database->connect();
         $stmt = $this->database->getConnection()->prepare("

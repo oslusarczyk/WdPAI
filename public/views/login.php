@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="public/img/smartcar_logo.ico">
-    <link rel="stylesheet" type="text/css"  href="public/css/basic_styling.css" />
+    <link rel="stylesheet" type="text/css" href="public/css/basic_styling.css" />
     <link rel="stylesheet" type="text/css" href="public/css/login.css" />
     <script src="public\js\utils.js" defer></script>
     <title>LOGIN</title>
@@ -49,6 +49,6 @@
             ?>
             </p>
             <span class="close_modal">&#10006;</span>
-            </div>
+    </div>
 </body>
 </html>

@@ -2,8 +2,13 @@
 
 require_once 'Repository.php';
 require_once __DIR__.'/../models/Brand.php';
+require_once 'IBrandRepository.php';
 
-class BrandRepository extends Repository{
+class BrandRepository extends Repository implements IBrandRepository{
+    public function __construct(IDatabase $database)
+    {
+        parent::__construct($database);
+    }
     public function getAllBrands() :array{
     $this->database->connect();
         $stmt = $this->database->getConnection()->prepare('

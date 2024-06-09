@@ -1,5 +1,6 @@
 <?php
-class Reservation{
+include_once 'IReservation.php';
+class Reservation implements IReservation {
     private $reservation_id;
     private $car_name;
     private $location_name;

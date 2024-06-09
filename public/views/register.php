@@ -39,14 +39,19 @@
                 <button type="submit">Zarejestruj się</button>
             </form>
             <p>Masz już konto? <a href="/login">Zaloguj się</a></p>
-            <?php
-                if(isset($messages)) {
-                    foreach ($messages as $message) {
-                        echo $message;
-                    }
-                }
-            ?>
         </div>
+    </div>
+    <div class="message <?php if(!empty($messages)) echo 'visible'; ?>" >
+        <p>
+            <?php
+            if(isset($messages)) {
+                foreach ($messages as $message) {
+                    echo $message;
+                }
+            }
+            ?>
+        </p>
+        <span class="close_modal">&#10006;</span>
     </div>
 </body>
 </html>

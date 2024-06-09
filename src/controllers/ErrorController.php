@@ -2,24 +2,22 @@
 
 require_once 'AppController.php';
 
+class ErrorController extends AppController
+{
+    private static ?ErrorController $instance = null;
 
-class ErrorController extends AppController {
-    private static $instance;
-
-    public function error(){
-         $url = "http://$_SERVER[HTTP_HOST]";
-        return header("Location: {$url}/error");
+    public function error(): void
+    {
+        $this->redirect('error');
     }
 
-
-    public static function getInstance()
+    public static function getInstance(): self
     {
-        if (!self::$instance) {
+        if (self::$instance === null) {
             self::$instance = new self();
         }
         return self::$instance;
     }
-
 }
 
 ?>

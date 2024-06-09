@@ -2,8 +2,13 @@
 
 require_once 'Repository.php';
 require_once __DIR__.'/../models/Location.php';
+require_once 'ILocationRepository.php';
 
-class LocationRepository extends Repository{
+class LocationRepository extends Repository implements ILocationRepository{
+    public function __construct(IDatabase $database)
+    {
+        parent::__construct($database);
+    }
     public function getAllLocations() :array{
     $this->database->connect();
         $stmt = $this->database->getConnection()->prepare('
@@ -12,6 +17,7 @@ class LocationRepository extends Repository{
     $stmt->execute();
     $this->database->disconnect();
     $locations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $result = [];
     foreach ($locations as $location) {
         $result[] = new Location($location['location_name'],$location['location_id']);
     }
@@ -30,6 +36,7 @@ class LocationRepository extends Repository{
         $stmt->execute();
         $this->database->disconnect();
         $locations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = [];
         foreach ($locations as $location) {
             $result[] = new Location($location['location_name'],$location['location_id']);
         }

@@ -1,87 +1,109 @@
 <?php
 require_once 'AppController.php';
-require_once __DIR__.'/../repository/LocationRepository.php';
-require_once __DIR__.'/../repository/CarRepository.php';
-require_once __DIR__.'/../repository/BrandRepository.php';
+require_once __DIR__.'/../repository/ILocationRepository.php';
+require_once __DIR__.'/../repository/ICarRepository.php';
+require_once __DIR__.'/../repository/IBrandRepository.php';
 require_once __DIR__.'/../models/Location.php';
 require_once __DIR__.'/../models/Car.php';
 require_once __DIR__.'/../models/Brand.php';
 
-
 class CarsController extends AppController
-
 {
-    private $locationRepository;
-    private $carRepository;
-    private $brandRepository;
+    private ILocationRepository $locationRepository;
+    private ICarRepository $carRepository;
+    private IBrandRepository $brandRepository;
 
-    public function __construct(){
+    public function __construct(ILocationRepository $locationRepository, ICarRepository $carRepository, IBrandRepository $brandRepository){
         parent::__construct();
-        $this->locationRepository = new LocationRepository();
-        $this->carRepository = new CarRepository();
-        $this->brandRepository = new BrandRepository();
+        $this->locationRepository = $locationRepository;
+        $this->carRepository = $carRepository;
+        $this->brandRepository = $brandRepository;
     }
 
-    public function main()
+    public function main(): void
     {
-        if(!$this->isGet()){
-            return $this->render('main');
+        if (!$this->isGet()) {
+            $this->render('main');
+            return;
         }
+
         $locations = $this->locationRepository->getAllLocations();
         $cars = $this->carRepository->getMostPopularCars();
-        return $this->render('main', ['locations' => $locations, 'cars'=> $cars]);
-
+        $this->render('main', ['locations' => $locations, 'cars' => $cars]);
     }
 
-    public function cars()
+    public function cars(): void
     {
-        if(!$this->isGet()){
-            return $this->render('cars');
+        if (!$this->isGet()) {
+            $this->render('cars');
+            return;
         }
-        if(isset($_GET['location'])){
-            $cars = $this->carRepository->getAllCars($_GET['location']);
-        } else{
-            $cars = $this->carRepository->getAllCars();
-        }
+
+        $location = $_GET['location'] ?? null;
+        $cars = $this->carRepository->getAllCars($location);
         $locations = $this->locationRepository->getAllLocations();
         $brands = $this->brandRepository->getAllBrands();
-    
-        return $this->render('cars', ['locations' => $locations, 'brands' => $brands, 'cars' => $cars, 'selectedLocation'=> $_GET['location'] ?? '' ]);
+
+        $this->render('cars', [
+            'locations' => $locations,
+            'brands' => $brands,
+            'cars' => $cars,
+            'selectedLocation' => $location ?? ''
+        ]);
     }
 
-    public function filterCars(){
+    public function filterCars(): void
+    {
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
-        if ($contentType === "application/json") {
-            $content = trim(file_get_contents("php://input"));
-            $decoded = json_decode($content, true);
 
-            header('Content-type: application/json');
-            http_response_code(200);
-            $seatsValue = intval($decoded['seats']);
-            $minPriceValue = intval($decoded['price_min']);
-            $maxPriceValue = intval($decoded['price_max']);
-            echo json_encode($this->carRepository->getAllCars($decoded['location'],$decoded['brand'],$seatsValue,$minPriceValue,$maxPriceValue));
-            
+        if ($contentType !== "application/json") {
+            return;
         }
+
+        $content = trim(file_get_contents("php://input"));
+        $decoded = json_decode($content, true);
+
+
+        header('Content-type: application/json');
+        http_response_code(200);
+
+        $seatsValue = intval($decoded['seats']);
+        $minPriceValue = intval($decoded['price_min']);
+        $maxPriceValue = intval($decoded['price_max']);
+        $filteredCars = $this->carRepository->getAllCars(
+            $decoded['location'],
+            $decoded['brand'],
+            $seatsValue,
+            $minPriceValue,
+            $maxPriceValue
+        );
+
+        echo json_encode($filteredCars);
     }
 
-
-    public function carDetails(){
-        if(!$this->isGet()){
-            return $this->render('carDetails');
+    public function carDetails(): void
+    {
+        if (!$this->isGet()) {
+            $this->render('carDetails');
+            return;
         }
 
-        if(isset($_GET['id'])){
-            $car_id = $_GET['id'];
+        if (!isset($_GET['id'])) {
+            $this->render('carDetails');
+            return;
+        }
+
+
+
+        $car_id = $_GET['id'];
+        $car = $this->carRepository->getCarById($car_id);
+        if (!$car) {
+            $this->render('carDetails', ['messages' => ['Nie znaleziono samochodu o takim id.']]);
+            return;
         }
         $locations = $this->locationRepository->getLocationsByCar($car_id);
-        $car = $this->carRepository->getCarById($car_id);
-        return $this->render('carDetails', ['car' => $car, 'locations' => $locations]);
+
+        $this->render('carDetails', ['car' => $car, 'locations' => $locations]);
     }
-
-
-
-
 }
-
 ?>

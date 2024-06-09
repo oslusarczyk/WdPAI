@@ -2,8 +2,13 @@
 
 require_once 'Repository.php';
 require_once __DIR__.'/../models/User.php';
+require_once 'IUserRepository.php';
 
-class UserRepository extends Repository{
+class UserRepository extends Repository implements IUserRepository{
+    public function __construct(IDatabase $database)
+    {
+        parent::__construct($database);
+    }
     public function addUser(User $user) : void{
     $this->database->connect();
     $stmt = $this->database->getConnection()->prepare('
@@ -45,10 +50,7 @@ class UserRepository extends Repository{
 
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     $this->database->disconnect();
-    if($user){
-        return true;
-    }
-    return false;
+    return $user !== false;
     }
 }
 ?>

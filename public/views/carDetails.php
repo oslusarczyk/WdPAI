@@ -3,6 +3,9 @@
         $user = unserialize($_SESSION['user']);
         $user_id = $user->getId();
     }
+
+    $message = $_SESSION['message'] ?? '';
+    unset($_SESSION['message']);
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +19,7 @@
     <link rel="icon" type="image/x-icon" href="public/img/smartcar_logo.ico">
     <link rel="stylesheet" type="text/css" href="public/css/basic_styling.css">
     <link rel="stylesheet" type="text/css" href="public/css/car_details.css">
-    <script src="public/js/reservation.js" defer></script>
+<!--    <script src="public/js/reservation.js" defer></script>-->
     <title>OPIS SAMOCHODU</title>
 </head>
 
@@ -24,6 +27,7 @@
     <div class="wrapper">
         <?php include_once __DIR__ . '/shared/nav.php' ?>
         <div class="wrapper_main">
+            <?php if ($car): ?>
             <div class="details_wrapper">
                 <div class="car_image">
                     <img src="public/img/uploads/<?= $car['photo']; ?>" alt="car image">
@@ -86,12 +90,22 @@
                             Zarezerwuj
                         </button>
                     </form>
-
                 </div>
+                <?php else: ?>
+                    <div class="message visible">
+                        <p>Nie znaleziono szczegółów samochodu.</p>
+                        <span class="close_modal">&#10006;</span>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
-
     </div>
+    <?php if ($message): ?>
+        <div class="message visible">
+            <p><?= htmlspecialchars($message) ?></p>
+            <span class="close_modal">&#10006;</span>
+        </div>
+    <?php endif; ?>
 </body>
 
 </html>
