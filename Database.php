@@ -1,8 +1,11 @@
 <?php
 
 require_once "config.php";
+require_once 'IDatabase.php';
 
-class Database {
+
+
+class Database implements IDatabase {
     private static $instance = null;
     private $connection;
     private $username;

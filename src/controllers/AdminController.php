@@ -1,56 +1,72 @@
 <?php
 require_once 'AppController.php';
 
-require_once __DIR__.'/../repository/ReservationRepository.php';
-require_once __DIR__.'/../repository/CarRepository.php';
 require_once __DIR__.'/../models/Reservation.php';
 require_once __DIR__.'/../models/Car.php';
+require_once __DIR__.'/../services/IFileHandler.php';
 
 class AdminController extends AppController
-
 {
-    const MAX_FILE_SIZE = 1024 * 1024;
-    const SUPPORTED_TYPES = ['image/png', 'image/jpeg'];
-    const UPLOAD_DIRECTORY = '/../public/img/uploads/';
-    private $message = [];
-    private $reservationRepository;
-    private $carRepository;
-    private $locationRepository;
-    private $brandRepository;
-    public function __construct(){
+
+    private array $message = [];
+    private IReservationRepository $reservationRepository;
+    private ICarRepository $carRepository;
+    private ILocationRepository $locationRepository;
+    private IBrandRepository $brandRepository;
+    private IFileHandler $fileHandler;
+    private IValidator $validator;
+
+    public function __construct(
+        IReservationRepository $reservationRepository,
+        ICarRepository $carRepository,
+        ILocationRepository $locationRepository,
+        IBrandRepository $brandRepository,
+        IFileHandler $fileHandler,
+        IValidator $validator
+    ){
         parent::__construct();
-        $this->reservationRepository = new ReservationRepository();
-        $this->carRepository = new CarRepository();
-        $this->locationRepository = new LocationRepository();
-        $this->brandRepository = new BrandRepository();
+        $this->reservationRepository = $reservationRepository;
+        $this->carRepository = $carRepository;
+        $this->locationRepository = $locationRepository;
+        $this->brandRepository = $brandRepository;
+        $this->fileHandler = $fileHandler;
+        $this->validator = $validator;
     }
 
-
-
-    public function carAdmin()
+    public function carAdmin() :void
     {
-        if(!$this->isGet()){
-            return $this->render('carAdmin');
-        }
-
         $reservationsToManage = $this->reservationRepository->getPendingReservations();
-        return $this->render("carAdmin",['reservations' => $reservationsToManage]);
+        $this->render("carAdmin", ['reservations' => $reservationsToManage]);
     }
 
-    function handleReservation(){
-        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
-        if ($contentType === "application/json") {
-            $content = trim(file_get_contents("php://input"));
-            $decoded = json_decode($content, true);
-            header('Content-type: application/json');
-            http_response_code(200);
-            $this->reservationRepository->updateReservationStatus($decoded['action'],$decoded['reservation_id']);
+    public function handleReservation() : void{
+        if(!$this->isPost()){
+            return;
         }
+
+        $action = $_POST['action'] ?? null;
+        $reservationId = $_POST['reservation_id'] ?? null;
+
+        if ($action === null || $reservationId === null) {
+            return;
+        }
+
+        $this->reservationRepository->updateReservationStatus($action, $reservationId);
+        $this->redirectToReferer();
     }
 
-    function addCar(){
-        if($this->isPost() && $this->validateFile($_FILES['car_photo'])){
-            if($this->validateForm($_POST)){
+    public function addCar(): void
+    {
+        if ($this->isPost()) {
+            if (!$this->fileHandler->validate($_FILES['car_photo'])) {
+                $this->message[] = $this->fileHandler->getError();
+            }
+
+            if (!$this->validator->validateCarForm($_POST)) {
+                $this->message[] = 'Brak wypełnionego formularza';
+            }
+
+            if (empty($this->message)) {
                 $brand_id = intval($_POST['brand']);
                 $model = $_POST['model_select'];
                 $price = intval($_POST['price_input']);
@@ -60,74 +76,30 @@ class AdminController extends AppController
                 $locations = $_POST['locations'];
                 $description = htmlentities($_POST['car_description']);
 
-                $this->upload_file($_FILES['car_photo']);
-                $car = new Car($brand_id,$model,$price,$seats,$car_photo,"" , 0, $production_year, $description);
-                $this->carRepository->addCar($car,$locations);
+                $this->fileHandler->upload($_FILES['car_photo']);
 
-            };
+                $car = (new CarBuilder())
+                    ->setBrand($brand_id)
+                    ->setModel($model)
+                    ->setPricePerDay($price)
+                    ->setSeatsAvailable($seats)
+                    ->setPhoto($car_photo)
+                    ->setProductionYear($production_year)
+                    ->setCarDescription($description)
+                    ->build();
+                $this->carRepository->addCar($car, $locations);
+
+                $this->redirectToReferer();
+            }
         }
 
         $locations = $this->locationRepository->getAllLocations();
         $brands = $this->brandRepository->getAllBrands();
-        return $this->render('addCar',['locations' => $locations, 'brands' => $brands,'messages' => $this->message]);
+        $this->render('addCar', ['locations' => $locations, 'brands' => $brands, 'messages' => $this->message]);
     }
 
 
-    private function validateFile(array $file): bool
-    {
-        if (!is_uploaded_file($file['tmp_name'])){
-            $this->message[] = 'Brak pliku';
-            return false;
-        }
-        if ($file['size'] > self::MAX_FILE_SIZE) {
-            $this->message[] = 'Wybrany plik jest za duży';
-            return false;
-        }
 
-        if (!isset($file['type']) || !in_array($file['type'], self::SUPPORTED_TYPES)) {
-            $this->message[] = 'Wybrany plik ma złe rozszerzenie.';
-            return false;
-        }
-        return true;
-    }
-
-    private function validateForm(array $post_data) :bool
-    {
-        $required_fields = [
-            'brand',
-            'model_select',
-            'price_input',
-            'seats',
-            'production_year',
-            'locations',
-            'car_description'
-        ];
-
-        foreach ($required_fields as $field) {
-            if (empty($post_data[$field])) {
-                $this->message[] = 'Brak podanej wartości';
-                return false;
-
-            }
-            if ($field === 'locations' && !is_array($post_data[$field])){
-                $this->message[] = 'Brak podanych lokalizacji dla samochodu';
-                return false;
-            }
-        }
-        return true;
-    }
-
-//    private function addLocations($returned_id, mixed $locations)
-//    {
-//
-//    }
-    private function upload_file(mixed $car_photo): void
-    {
-        move_uploaded_file(
-            $car_photo['tmp_name'],
-            dirname(__DIR__) . self::UPLOAD_DIRECTORY . $car_photo['name']
-        );
-    }
 
 }
 ?>

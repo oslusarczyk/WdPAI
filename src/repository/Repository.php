@@ -1,11 +1,12 @@
 <?php
 
 require_once __DIR__.'/../../Database.php';
+require_once __DIR__.'/../../IDatabase.php';
 
 class Repository {
-    protected $database;
+    protected IDatabase $database;
 
-    public function __construct()
+    public function __construct(IDatabase $database)
     {
         $this->database = Database::getInstance();
     }

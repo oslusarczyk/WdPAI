@@ -9,7 +9,7 @@
     <link rel="icon" type="image/x-icon" href="public/img/smartcar_logo.ico">
     <link rel="stylesheet" type="text/css" href="public/css/basic_styling.css">
     <link rel="stylesheet" type="text/css" href="public/css/carAdmin.css">
-    <script src="public/js/adminReservation.js" defer></script>
+<!--    <script src="public/js/adminReservation.js" defer></script>-->
     <title>REZERWACJE - ADMIN</title>
 </head>
 
@@ -48,8 +48,13 @@
                             </p>
                             <p class="price"><?= $reservation->getReservationPrice(); ?> PLN</p>
                             <div class="button_wrapper flex-row">
-                            <button class="cancel" data-action="cancelled" >&#10005;</button>
-                            <button class="confirm" data-action="confirmed">&#10004;</button>
+<!--                            <button class="cancel" data-action="cancelled" >&#10005;</button>-->
+<!--                            <button class="confirm" data-action="confirmed">&#10004;</button>-->
+                                <form method="post" action="/handleReservation">
+                                    <input type="hidden" name="reservation_id" value="<?= htmlspecialchars($reservation->getReservationId()); ?>">
+                                    <button type="submit" name="action" value="cancelled" class="cancel">&#10005;</button>
+                                    <button type="submit" name="action" value="confirmed" class="confirm">&#10004;</button>
+                                </form>
                             </div>
 
                         </div>
@@ -58,6 +63,18 @@
                     <?php endif ;?>
                 </div>
             </div>
+        </div>
+        <div class="message <?php if(!empty($messages)) echo 'visible'; ?>" >
+            <p>
+                <?php
+                if(isset($messages)) {
+                    foreach ($messages as $message) {
+                        echo $message;
+                    }
+                }
+                ?>
+            </p>
+            <span class="close_modal">&#10006;</span>
         </div>
 </body>
 

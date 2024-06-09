@@ -1,82 +1,85 @@
 <?php
 require_once 'AppController.php';
-require_once __DIR__.'/../repository/UserRepository.php';
+require_once __DIR__.'/../repository/IUserRepository.php';
+require_once __DIR__.'/../services/PasswordHandler.php';
 require_once __DIR__.'/../models/User.php';
 
 class SecurityController extends AppController
-
 {
-    private $userRepository;
+    private IUserRepository $userRepository;
+    private IPasswordHandler $passwordHandler;
+    private IValidator $validator;
 
-    public function __construct(){
+    public function __construct(IUserRepository $userRepository, IPasswordHandler $passwordHandler, IValidator $validator)
+    {
         parent::__construct();
-        $this->userRepository = new UserRepository();
-
+        $this->userRepository = $userRepository;
+        $this->passwordHandler = $passwordHandler;
+        $this->validator = $validator;
     }
 
-    public function login()
+    public function login(): void
     {
-        if(!$this->isPost()){
-            return $this->render('login');
+        if (!$this->isPost()) {
+            $this->render('login');
+            return;
         }
+
         $email = $_POST['email'];
         $password = $_POST['password'];
 
         $user = $this->userRepository->getUser($email);
 
-
-        if(!$user){
-            return $this->render('login', ['messages' => ['Nie znaleziono użytkownika o takim mailu.']]);
-        }
-        if(!password_verify($password, $user->getPassword())){
-            return $this->render('login', ['messages' => ['Podano złe hasło użytkownika']]);
+        if (!$user) {
+            $this->render('login', ['messages' => ['Nie znaleziono użytkownika o takim mailu.']]);
+            return;
         }
 
+        if (!$this->passwordHandler->verifyPassword($password, $user->getPassword())) {
+            $this->render('login', ['messages' => ['Podano złe hasło użytkownika']]);
+            return;
+        }
 
         $_SESSION['user'] = serialize($user);
-        
-        $url = "http://$_SERVER[HTTP_HOST]";
-        return header("Location: {$url}/main");
+
+        $this->redirect('main');
     }
 
-    public function main()
+    public function register(): void
     {
-        return $this->render('main');
-
-    }
-
-
-    public function register()
-    {
-        if(!$this->isPost()){
-            return $this->render('register');
+        if (!$this->isPost()) {
+            $this->render('register');
+            return;
         }
+
         $email = $_POST['email'];
         $password = $_POST['password'];
         $passwordConfirmation = $_POST['password_confirmation'];
 
-        if($password !== $passwordConfirmation){
-            return $this->render('register', ['messages' => ["Podane hasła się różnią"]]); 
+        $validationResult = $this->validator->validateRegisterForm($email, $password, $passwordConfirmation);
+
+        if ($validationResult !== null) {
+            $this->render('register', ['messages' => [$validationResult]]);
+            return;
         }
 
         if($this->userRepository->doesEmailExists($email)){
-            return $this->render('register', ['messages' => ["Użytkownik o takim e-mailu już istnieje."]]); 
+           $this->render('register', ['messages' => ["Użytkownik o takim e-mailu już istnieje."]]);
+           return;
         }
 
+        $hashedPassword = $this->passwordHandler->hashPassword($password);
+        $user = new User($email, $hashedPassword);
 
-        $passwordHash = password_hash($password,PASSWORD_BCRYPT);
-        $user = new User($email,$passwordHash);
-       
         $this->userRepository->addUser($user);
-        return $this->render('login', ['messages' => ['Zostałeś zarejestrowany!']]);
+        $this->render('login', ['messages' => ['Zostałeś zarejestrowany!']]);
     }
 
-    public function logout(){
+    public function logout(): void
+    {
         session_unset();
         session_destroy();
-        $url = "http://$_SERVER[HTTP_HOST]";
-        header("Location: {$url}");
+        $this->redirect('');
     }
 }
-
 ?>

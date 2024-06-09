@@ -126,7 +126,7 @@ function createCarCard(car) {
 }
 
 inputsValue.forEach(input => input.addEventListener("change", () => {
-    currentPage = 1;  
+    currentPage = 1;
     filterCars();
 }));
 

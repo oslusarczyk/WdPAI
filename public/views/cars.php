@@ -20,7 +20,7 @@
             <div class="header flex-column">
                 <div class="form_wrapper search flex-column">
                     <h3>Wyszukaj</h3>
-                    <form class="flex-column search" action="" method="POST">
+                    <form class="flex-column search" action="/filterCars" method="POST">
                         <label for="location_select">Miejsce wynajmu
                             <select name="location" id="location_select">
                                 <option value="">Wszystkie</option>

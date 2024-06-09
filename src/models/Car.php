@@ -1,5 +1,6 @@
 <?php
-class Car {
+include_once 'ICar.php';
+class Car implements ICar {
     private $id;
     private $brand;
     private $model;
@@ -10,7 +11,15 @@ class Car {
     private $production_year;
     private $car_description;
 
-    public function __construct(string $brand, string $model, int $price_per_day, int $seats_available, string $photo, string $locations,int $id=0, int $production_year = 0, string $car_description = null){
+    public function __construct( string $brand = '',
+                                 string $model = '',
+                                 int $price_per_day = 0,
+                                 int $seats_available = 0,
+                                 string $photo = '',
+                                 string $locations = '',
+                                 int $id = 0,
+                                 int $production_year = 0,
+                                 string $car_description = ''){
         $this->id = $id;
         $this->brand = $brand;
         $this->model = $model;

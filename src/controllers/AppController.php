@@ -1,36 +1,42 @@
 <?php
 session_start();
+require_once __DIR__.'/../services/RequestHandler.php';
+require_once __DIR__.'/../services/ViewRenderer.php';
 class AppController {
-    private $request;
+    private $requestHandler;
+    private $viewRenderer;
 
-    public function __construct()
-    {
-        $this->request = $_SERVER['REQUEST_METHOD'];
+
+    public function __construct(RequestHandler $requestHandler = null, ViewRenderer $viewRenderer = null) {
+        $this->requestHandler = $requestHandler ?? new RequestHandler();
+        $this->viewRenderer = $viewRenderer ?? new ViewRenderer();
     }
+
 
     protected function isGet(): bool
     {
-        return $this->request === 'GET';
+        return $this->requestHandler->isGet();
     }
 
     protected function isPost(): bool
     {
-        return $this->request === 'POST';
+        return $this->requestHandler->isPost();
+    }
+
+    protected function redirect(string $path): void
+    {
+        $url = "http://$_SERVER[HTTP_HOST]/{$path}";
+        header("Location: {$url}");
+    }
+
+    protected function redirectToReferer(): void{
+        $url = $_SERVER['HTTP_REFERER'];
+        header("Location: {$url}");
     }
     
 
     protected function render(string $template = null, array $variables = [])
     {
-        $templatePath = 'public/views/'. $template.'.php';
-
-        if(!file_exists($templatePath)){
-            $templatePath = 'public/views/error.php';
-        }
-        extract($variables);
-            
-        ob_start();
-        include $templatePath;
-        $output = ob_get_clean();
-        print $output;
+        $this->viewRenderer->render($template, $variables);
     }
 }
